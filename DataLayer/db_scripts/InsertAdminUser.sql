@@ -1,0 +1,34 @@
+USE SLRG_BERN_JUGEND;
+
+GO
+
+CREATE PROCEDURE InsertAdminUser(
+@Username nvarchar(32),
+@Password nvarchar(64),
+@Salt nvarchar(64),
+@Email nvarchar(32)
+)
+AS
+BEGIN
+
+	INSERT INTO USERS
+	(Username,[Password],Salt,Email,[Admin]) VALUES
+	(@Username,@Password,@Salt,@Email,1);
+
+	DECLARE @AdminPk int = (SELECT TOP(1) PK FROM USERS ORDER BY PK DESC);
+	DECLARE @PersonPk int;
+
+	DECLARE PERSON_CURSOR CURSOR FOR
+		(SELECT PK FROM PEOPLE);
+		OPEN PERSON_CURSOR;
+			FETCH NEXT FROM PERSON_CURSOR INTO @PersonPk;
+			WHILE @@FETCH_STATUS = 0
+			BEGIN
+				INSERT INTO PERMISSIONS
+				(FK_U,FK_P)VALUES
+				(@AdminPk,@PersonPk);
+				FETCH NEXT FROM PERSON_CURSOR INTO @PersonPk
+			END
+		CLOSE PERSON_CURSOR
+	DEALLOCATE PERSON_CURSOR;
+END

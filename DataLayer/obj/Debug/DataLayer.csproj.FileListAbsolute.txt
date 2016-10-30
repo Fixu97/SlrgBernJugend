@@ -1,0 +1,16 @@
+C:\Users\tgdnefe1\VisualStudioProj\SlrgBernJugendZeitenanalyse\DataLayer\bin\Debug\DataLayer.dll.config
+C:\Users\tgdnefe1\VisualStudioProj\SlrgBernJugendZeitenanalyse\DataLayer\bin\Debug\DataLayer.dll
+C:\Users\tgdnefe1\VisualStudioProj\SlrgBernJugendZeitenanalyse\DataLayer\bin\Debug\DataLayer.pdb
+C:\Users\tgdnefe1\VisualStudioProj\SlrgBernJugendZeitenanalyse\DataLayer\bin\Debug\Shared.dll
+C:\Users\tgdnefe1\VisualStudioProj\SlrgBernJugendZeitenanalyse\DataLayer\bin\Debug\Shared.pdb
+C:\Users\tgdnefe1\VisualStudioProj\SlrgBernJugendZeitenanalyse\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
+C:\Users\tgdnefe1\VisualStudioProj\SlrgBernJugendZeitenanalyse\DataLayer\obj\Debug\DataLayer.dll
+C:\Users\tgdnefe1\VisualStudioProj\SlrgBernJugendZeitenanalyse\DataLayer\obj\Debug\DataLayer.pdb
+D:\dev\SlrgBernJugendZeitenanalyse\DataLayer\bin\Debug\DataLayer.dll.config
+D:\dev\SlrgBernJugendZeitenanalyse\DataLayer\bin\Debug\DataLayer.dll
+D:\dev\SlrgBernJugendZeitenanalyse\DataLayer\bin\Debug\DataLayer.pdb
+D:\dev\SlrgBernJugendZeitenanalyse\DataLayer\bin\Debug\Shared.dll
+D:\dev\SlrgBernJugendZeitenanalyse\DataLayer\bin\Debug\Shared.pdb
+D:\dev\SlrgBernJugendZeitenanalyse\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
+D:\dev\SlrgBernJugendZeitenanalyse\DataLayer\obj\Debug\DataLayer.dll
+D:\dev\SlrgBernJugendZeitenanalyse\DataLayer\obj\Debug\DataLayer.pdb

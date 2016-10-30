@@ -1,0 +1,20 @@
+﻿<tr>
+    <th>
+        Person
+    </th>
+    <td id="td-FK_P">
+    </td>
+</tr>
+<tr>
+    <th>
+        User
+    </th>
+    <td id="td-FK_U">
+    </td>
+</tr>
+<script>
+    $(document).ready(function() {
+        CreatePeopleDropdown(0, $("#td-FK_P"));
+        CreateUsersDropdown(0, $("#td-FK_U"));
+    });
+</script>

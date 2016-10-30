@@ -1,0 +1,34 @@
+﻿@model PresentationLayer.Models.DetailsModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h2>
+    @ViewBag.Title
+    <button id="delete" class="btn btn-danger" type="button" style="float:right">Delete @Model.DisplayName</button>
+    <button id="edit" class="btn btn-warning" type="button" style="float:right">Edit @Model.DisplayName</button>
+</h2>
+
+@Html.ActionLink(Model.ControllerName, "Index", Model.ControllerName) /
+@Html.ActionLink(Model.DisplayName, "Details", Model.ControllerName, new { id = Model.DbObj.Pk }, null) /
+
+<table class="table table-striped table-bordered" id ="dataTable">
+    <tbody>
+        <tr>
+            <th>
+                #
+            </th>
+            <td>
+                @Html.Raw(Model.DbObj.Pk)
+            </td>
+        </tr>
+        @Html.Partial("~/Views/DBObjViews/" + Model.ControllerName + "/Details.cshtml",Model.DbObj)
+    </tbody>
+</table>
+@Html.Partial("~/Views/DBObjViews/" + Model.ControllerName + "/Charts.cshtml", Model.DbObj)
+@Scripts.Render("/Scripts/Model/Details.js")
+<script>
+    Pk = @Model.DbObj.Pk;
+    Controller = '@Model.ControllerName';
+</script>

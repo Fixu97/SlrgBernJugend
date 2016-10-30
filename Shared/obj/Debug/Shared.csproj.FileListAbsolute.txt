@@ -1,0 +1,10 @@
+C:\Users\tgdnefe1\VisualStudioProj\SlrgBernJugendZeitenanalyse\Shared\bin\Debug\Shared.dll
+C:\Users\tgdnefe1\VisualStudioProj\SlrgBernJugendZeitenanalyse\Shared\bin\Debug\Shared.pdb
+C:\Users\tgdnefe1\VisualStudioProj\SlrgBernJugendZeitenanalyse\Shared\obj\Debug\Shared.csprojResolveAssemblyReference.cache
+C:\Users\tgdnefe1\VisualStudioProj\SlrgBernJugendZeitenanalyse\Shared\obj\Debug\Shared.dll
+C:\Users\tgdnefe1\VisualStudioProj\SlrgBernJugendZeitenanalyse\Shared\obj\Debug\Shared.pdb
+D:\dev\SlrgBernJugendZeitenanalyse\Shared\bin\Debug\Shared.dll
+D:\dev\SlrgBernJugendZeitenanalyse\Shared\bin\Debug\Shared.pdb
+D:\dev\SlrgBernJugendZeitenanalyse\Shared\obj\Debug\Shared.csprojResolveAssemblyReference.cache
+D:\dev\SlrgBernJugendZeitenanalyse\Shared\obj\Debug\Shared.dll
+D:\dev\SlrgBernJugendZeitenanalyse\Shared\obj\Debug\Shared.pdb

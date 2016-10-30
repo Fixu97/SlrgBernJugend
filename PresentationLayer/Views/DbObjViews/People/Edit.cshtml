@@ -1,0 +1,58 @@
+﻿@using System.Web.Mvc.Html
+@model Shared.Models.db.PersonDTO
+<tr>
+    <th>
+        Prename
+    </th>
+    <td>
+        @Html.TextBoxFor(model => Model.Prename)
+    </td>
+</tr>
+<tr>
+    <th>
+        Lastname
+    </th>
+    <td>
+        @Html.TextBoxFor(model => Model.LastName)
+    </td>
+</tr>
+<tr>
+    <th>
+        Male
+    </th>
+    <td>
+        @Html.CheckBoxFor(model => Model.Male)
+    </td>
+</tr>
+<tr>
+    <th>
+        Birthday
+    </th>
+    <td>
+        @Html.TextBoxFor(model => Model.Birthday,new { Value = Model.Birthday.ToString("dd.MM.yyyy")})
+    </td>
+</tr>
+<tr>
+    <th>
+        PhoneNr
+    </th>
+    <td>
+        @Html.TextBoxFor(model => Model.PhoneNr, new {pattern = @"^(\+41 |0)\d\d \d\d\d \d\d \d\d$" })
+    </td>
+</tr>
+<tr>
+    <th>
+        Email
+    </th>
+    <td>
+        @Html.TextBoxFor(model => Model.Email)
+    </td>
+</tr>
+<tr>
+    <th>
+        Active
+    </th>
+    <td>
+        @Html.CheckBoxFor(model => Model.Active)
+    </td>
+</tr>
