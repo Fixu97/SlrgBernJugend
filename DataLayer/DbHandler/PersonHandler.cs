@@ -66,57 +66,33 @@ namespace DataLayer.DbHandler
 
             using (SqlConnection con = new SqlConnection(_readerConnectionString))
             {
-                try
-                {
-                    var query = new SqlCommand(cmd, con);
-                    AddParameters(query, parameters);
+                var query = new SqlCommand(cmd, con);
+                AddParameters(query, parameters);
 
-                    // Add paramters
-                    for (int i = 0; i < parameters.Count; i++)
+                con.Open();
+
+                using (var sqlReader = query.ExecuteReader())
+                {
+                    while (sqlReader.Read())
                     {
-                        if (string.IsNullOrEmpty(parameters[i]))
-                        {
+                        var birthday = sqlReader.IsDBNull(3) ? new DateTime() : sqlReader.GetDateTime(3);
+                        var phoneNr = sqlReader.IsDBNull(6) ? "" : sqlReader.GetString(6);
+                        var email = sqlReader.IsDBNull(7) ? "" : sqlReader.GetString(7);
 
-                            query.Parameters.AddWithValue("@var" + i, DBNull.Value);
-                            continue;
-                        }
-                        query.Parameters.AddWithValue("@var" + i, parameters[i]);
+                        var tmpPerson = GetPersonDto
+                        (
+                            sqlReader.GetInt32(0),
+                            sqlReader.GetString(1),
+                            sqlReader.GetString(2),
+                            birthday,
+                            sqlReader.GetBoolean(4),
+                            sqlReader.GetBoolean(5),
+                            phoneNr,
+                            email
+                        );
+                        people.Add((T)tmpPerson);
                     }
-
-                    con.Open();
-
-                    using (var sqlReader = query.ExecuteReader())
-                    {
-                        while (sqlReader.Read())
-                        {
-                            var birthday = sqlReader.IsDBNull(3) ? new DateTime() : sqlReader.GetDateTime(3);
-                            var phoneNr = sqlReader.IsDBNull(6) ? "" : sqlReader.GetString(6);
-                            var email = sqlReader.IsDBNull(7) ? "" : sqlReader.GetString(7);
-
-                            var tmpPerson = GetPersonDto
-                            (
-                                sqlReader.GetInt32(0),
-                                sqlReader.GetString(1),
-                                sqlReader.GetString(2),
-                                birthday,
-                                sqlReader.GetBoolean(4),
-                                sqlReader.GetBoolean(5),
-                                phoneNr,
-                                email
-                            );
-                            people.Add((T)tmpPerson);
-                        }
-                        con.Close();
-                    }
-                }
-                catch (SqlException e)
-                {
-                    throw;
-                }
-                catch (Exception e)
-                {
-                    con.Dispose();
-                    throw;
+                    con.Close();
                 }
 
             }

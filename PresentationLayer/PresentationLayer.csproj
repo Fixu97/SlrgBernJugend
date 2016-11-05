@@ -241,6 +241,7 @@
     <Content Include="Content\Chart.js-master\src\Chart.PolarArea.js" />
     <Content Include="Content\Chart.js-master\src\Chart.Radar.js" />
     <Content Include="Content\img\water_big.jpg" />
+    <Content Include="Content\img\water_small.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -322,6 +323,7 @@
     <Content Include="Content\Chart.js-master\LICENSE.md" />
     <Content Include="Content\Chart.js-master\package.json" />
     <Content Include="Content\Chart.js-master\README.md" />
+    <None Include="Properties\PublishProfiles\SlrgBern.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Images\SlrgBernLogoTransparent.gif" />
     <Content Include="Scripts\bootstrap.js" />

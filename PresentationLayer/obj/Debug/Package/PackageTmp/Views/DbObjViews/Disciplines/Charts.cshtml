@@ -1,0 +1,59 @@
+﻿
+
+<div id ="chart-area">
+    <ul class="nav nav-tabs">
+        <li id="genderMixed" class="active">
+            <a data-toggle="tab">Mixed</a>
+        </li>
+        <li id="genderFemale">
+            <a data-toggle="tab">Women</a>
+        </li>
+        <li id="genderMale">
+            <a data-toggle="tab">Men</a>
+        </li>
+    </ul>
+    <div id = "tab-content"></div>
+</div>
+
+<script>
+
+    $(document).ready(function() {
+
+        // Set all tabs inactive
+        $("ul.nav.nav-tabs a.active").first().addClass("active");
+
+        // Assign width until chart is loaded
+        //$("#tab-content").attr("style","height:500px");
+
+        CreateChart($("#tab-content") , @Model.Pk);
+        
+    });
+
+    $(".nav.nav-tabs").click(function() {
+        
+        // Set all tabs inactive
+        $("ul.nav.nav-tabs li.active").removeClass("active");
+
+        // Set current tab active
+        $(event.target.parentElement).addClass("active");
+
+        var id = $(event.target.parentElement).attr("id");
+
+        switch (id) {
+            case "genderMixed":
+                CreateChart($("#tab-content") , @Model.Pk);
+                break;
+            case "genderMale":
+                CreateChartForDisciplineByGender($("#tab-content"), @Model.Pk, true);
+                break;
+            case "genderFemale":
+                CreateChartForDisciplineByGender($("#tab-content"), @Model.Pk, false);
+                break;
+            dafault:
+                CreateChart($(this),"Discipline" , @Model.Pk);
+                break;
+        }
+    });
+
+</script>
+@Scripts.Render("~/bundles/chartjs")

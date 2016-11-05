@@ -18,3 +18,13 @@ D:\dev\SlrgBernJugendZeitenanalyse\BusinessLayer\bin\Debug\Shared.pdb
 D:\dev\SlrgBernJugendZeitenanalyse\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
 D:\dev\SlrgBernJugendZeitenanalyse\BusinessLayer\obj\Debug\BusinessLayer.dll
 D:\dev\SlrgBernJugendZeitenanalyse\BusinessLayer\obj\Debug\BusinessLayer.pdb
+D:\dev\Git\SlrgBernJugend\BusinessLayer\bin\Debug\BusinessLayer.dll
+D:\dev\Git\SlrgBernJugend\BusinessLayer\bin\Debug\BusinessLayer.pdb
+D:\dev\Git\SlrgBernJugend\BusinessLayer\bin\Debug\DataLayer.dll
+D:\dev\Git\SlrgBernJugend\BusinessLayer\bin\Debug\ExcelLibrary.dll
+D:\dev\Git\SlrgBernJugend\BusinessLayer\bin\Debug\Shared.dll
+D:\dev\Git\SlrgBernJugend\BusinessLayer\bin\Debug\DataLayer.pdb
+D:\dev\Git\SlrgBernJugend\BusinessLayer\bin\Debug\Shared.pdb
+D:\dev\Git\SlrgBernJugend\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
+D:\dev\Git\SlrgBernJugend\BusinessLayer\obj\Debug\BusinessLayer.dll
+D:\dev\Git\SlrgBernJugend\BusinessLayer\obj\Debug\BusinessLayer.pdb

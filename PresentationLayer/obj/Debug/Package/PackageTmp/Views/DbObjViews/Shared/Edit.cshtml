@@ -1,0 +1,34 @@
+﻿@model PresentationLayer.Models.DetailsModel
+@{
+    ViewBag.Title = Model.DisplayName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+    @Html.ActionLink(Model.ControllerName, "Index", Model.ControllerName) /
+    @Html.ActionLink(Model.DisplayName, "Details", Model.ControllerName, new { id = Model.DbObj.Pk }, null) /
+    @Html.ActionLink("Edit","Edit",Model.ControllerName,new{id=Model.DbObj.Pk},null) /
+
+    @using (Html.BeginForm("Edit", Model.ControllerName, new { id = Model.DbObj.Pk }, FormMethod.Post))
+    {
+        <table class="table table-striped table-bordered">
+            <tbody>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <td>
+                        @Html.Raw(Model.DbObj.Pk)
+                    </td>
+                </tr>
+                @Html.Partial("~/Views/DBObjViews/" + Model.ControllerName + "/Edit.cshtml", Model.DbObj)
+                <tr>
+                    <th></th>
+                    <td>
+                        <input type="submit" name="submit" value="submit" id="update"/>
+                        <input type="button" value="cancel" onclick="document.location='@Url.Action("Details", Model.ControllerName, new { id = Model.DbObj.Pk })';"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }

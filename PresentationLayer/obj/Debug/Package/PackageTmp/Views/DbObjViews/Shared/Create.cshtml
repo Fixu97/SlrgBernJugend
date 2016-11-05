@@ -1,0 +1,37 @@
+﻿@using PresentationLayer.Models
+@model PresentationLayer.Models.InsertModel
+@{
+    ViewBag.Title = "Create new " + Model.Title;
+}
+
+<h2>@ViewBag.Title</h2>
+@Html.ActionLink(Model.Title, "Index", Model.ControllerName) /
+@Html.ActionLink("Create", "Create", Model.ControllerName) /
+
+@using (Html.BeginForm("Create", Model.ControllerName, FormMethod.Post))
+{
+    <table class="table table-striped table-bordered">
+        <tbody>
+            @Html.Partial("~/Views/DBObjViews/" + Model.ControllerName + "/Create.cshtml", Model)
+            <tr>
+                <th></th>
+                <td>
+                    <input type="submit" value="submit" id="insert"/>
+                    <input type="button" value="cancel" onclick="document.location='@Url.Action("Index", Model.ControllerName)';" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+@if (Model.hist == InsertModel.History.Message)
+    {
+        <script type="text/javascript">
+            displaySuccessInfo('@Model.Message');
+        </script>
+    }
+else if (Model.hist == InsertModel.History.Error)
+    {
+        <script type="text/javascript">
+            displayErrorInfo('@Model.Message');
+        </script>
+    }
