@@ -13,7 +13,7 @@ namespace BusinessLayer.Excel
 {
     public class ExcelWriter
     {
-        #region Private fields
+        #region Private readonly fields
 
         private readonly List<PersonDTO> _people;
         private readonly DisciplineDTO _discipline;
@@ -21,12 +21,12 @@ namespace BusinessLayer.Excel
 
         #endregion
 
-        #region Public fields
+        #region Private properties
 
-        private string _fileLocation;
+        private static string _folderLocation => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        private static string _fileLocation => _folderLocation + "ExcelImport.xls";
 
         #endregion
-
 
         #region Constructors
 
@@ -67,6 +67,14 @@ namespace BusinessLayer.Excel
 
         #endregion
 
+        #region Public methods
+
+        public string GetExcelFilePath()
+        {
+            return _fileLocation;
+        }
+
+        #endregion
 
         #region Private methods
 
@@ -77,8 +85,6 @@ namespace BusinessLayer.Excel
         private void CreateInputExcel()
         {
             //create new xls file 
-            var pathToFile = ConfigurationManager.AppSettings.Get("ImportExcelPath");
-            _fileLocation = pathToFile + "ExcelImport.xls";
             Workbook workbook = new Workbook();
             Worksheet worksheet = new Worksheet("First Sheet");
 
@@ -115,19 +121,10 @@ namespace BusinessLayer.Excel
             workbook.Worksheets.Add(worksheet);
 
             // Make sure the directory exists
-            Directory.CreateDirectory(pathToFile);
+            Directory.CreateDirectory(_folderLocation);
 
             // Save the whole thing
             workbook.Save(_fileLocation);
-        }
-
-        #endregion
-
-        #region Public methods
-
-        public string GetExcelFilePath()
-        {
-            return _fileLocation;
         }
 
         #endregion
