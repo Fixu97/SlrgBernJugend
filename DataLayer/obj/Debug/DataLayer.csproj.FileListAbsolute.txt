@@ -17,8 +17,10 @@ D:\dev\SlrgBernJugendZeitenanalyse\DataLayer\obj\Debug\DataLayer.pdb
 D:\dev\Git\SlrgBernJugend\DataLayer\bin\Debug\DataLayer.dll.config
 D:\dev\Git\SlrgBernJugend\DataLayer\bin\Debug\DataLayer.dll
 D:\dev\Git\SlrgBernJugend\DataLayer\bin\Debug\DataLayer.pdb
+D:\dev\Git\SlrgBernJugend\DataLayer\bin\Debug\log4net.dll
 D:\dev\Git\SlrgBernJugend\DataLayer\bin\Debug\Shared.dll
 D:\dev\Git\SlrgBernJugend\DataLayer\bin\Debug\Shared.pdb
+D:\dev\Git\SlrgBernJugend\DataLayer\bin\Debug\log4net.xml
 D:\dev\Git\SlrgBernJugend\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
 D:\dev\Git\SlrgBernJugend\DataLayer\obj\Debug\DataLayer.dll
 D:\dev\Git\SlrgBernJugend\DataLayer\obj\Debug\DataLayer.pdb

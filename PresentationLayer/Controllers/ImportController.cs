@@ -19,6 +19,7 @@ namespace PresentationLayer.Controllers
     {
         private readonly DbPersonHandler<PersonDTO> _personHandler = new DbPersonHandler<PersonDTO>();
         private readonly DbDisciplineHandler<DisciplineDTO> _disciplineHandler = new DbDisciplineHandler<DisciplineDTO>();
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -77,18 +78,18 @@ namespace PresentationLayer.Controllers
         public FileResult GetImportFile()
         {
             var disciplineId = Request.Params["discipline"];
-            var discipline = (DisciplineDTO) _disciplineHandler.Select(int.Parse(disciplineId));
+            var discipline = (DisciplineDTO)_disciplineHandler.Select(int.Parse(disciplineId));
 
             var peopleIdarr = Request.Params["people"].Split(',');
-            
+
             var people = new List<PersonDTO>();
             for (var i = 0; i < peopleIdarr.Length; i++)
             {
                 var personId = int.Parse(peopleIdarr[i]);
-                var person = (PersonDTO) _personHandler.Select(personId);
+                var person = (PersonDTO)_personHandler.Select(personId);
                 people.Add(person);
             }
-            
+
             var writer = new ExcelWriter(discipline, people, new List<DateTime>());
             var filePath = writer.GetExcelFilePath();
 

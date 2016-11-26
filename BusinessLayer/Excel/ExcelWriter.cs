@@ -84,47 +84,54 @@ namespace BusinessLayer.Excel
         /// <returns>The relative path to the file</returns>
         private void CreateInputExcel()
         {
-            //create new xls file 
-            Workbook workbook = new Workbook();
-            Worksheet worksheet = new Worksheet("First Sheet");
-
-            #region Bug-fix
-            // Fill in some data see http://stackoverflow.com/questions/8107610/cant-open-excel-file-generated-with-excellibrary for reason
-            for (var i = 0; i < 100; i++)
-                worksheet.Cells[i, 0] = new Cell("");
-            #endregion
-
-
-            worksheet.Cells[0, 0] = new Cell(_discipline.Pk);
-            worksheet.Cells[0, 1] = new Cell(_discipline.DisplayName);
-            worksheet.Cells[1, 0] = new Cell("#");
-            worksheet.Cells[1, 1] = new Cell("Prename");
-            worksheet.Cells[1, 2] = new Cell("Lastname");
-
-            var j = 4;
-            foreach (var date in _dates)
+            try
             {
-                worksheet.Cells[1, j] = new Cell(date.ToString("dd.MM.yyyy"));
-                j++;
-            }
+                //create new xls file 
+                Workbook workbook = new Workbook();
+                Worksheet worksheet = new Worksheet("First Sheet");
 
-            j = 2;
-            foreach (var person in _people)
+                #region Bug-fix
+                // Fill in some data see http://stackoverflow.com/questions/8107610/cant-open-excel-file-generated-with-excellibrary for reason
+                for (var i = 0; i < 100; i++)
+                    worksheet.Cells[i, 0] = new Cell("");
+                #endregion
+
+
+                worksheet.Cells[0, 0] = new Cell(_discipline.Pk);
+                worksheet.Cells[0, 1] = new Cell(_discipline.DisplayName);
+                worksheet.Cells[1, 0] = new Cell("#");
+                worksheet.Cells[1, 1] = new Cell("Prename");
+                worksheet.Cells[1, 2] = new Cell("Lastname");
+
+                var j = 4;
+                foreach (var date in _dates)
+                {
+                    worksheet.Cells[1, j] = new Cell(date.ToString("dd.MM.yyyy"));
+                    j++;
+                }
+
+                j = 2;
+                foreach (var person in _people)
+                {
+                    worksheet.Cells[j, 0] = new Cell(person.Pk);
+                    worksheet.Cells[j, 1] = new Cell(person.Prename);
+                    worksheet.Cells[j, 2] = new Cell(person.LastName);
+                    j++;
+                }
+
+                // Add the Worksheet to the Workbook
+                workbook.Worksheets.Add(worksheet);
+
+                // Make sure the directory exists
+                Directory.CreateDirectory(_folderLocation);
+
+                // Save the whole thing
+                workbook.Save(_fileLocation);
+            }
+            catch (Exception e)
             {
-                worksheet.Cells[j, 0] = new Cell(person.Pk);
-                worksheet.Cells[j, 1] = new Cell(person.Prename);
-                worksheet.Cells[j, 2] = new Cell(person.LastName);
-                j++;
+                throw new Exception($"Error while saving import file to location: {_fileLocation}");
             }
-
-            // Add the Worksheet to the Workbook
-            workbook.Worksheets.Add(worksheet);
-
-            // Make sure the directory exists
-            Directory.CreateDirectory(_folderLocation);
-
-            // Save the whole thing
-            workbook.Save(_fileLocation);
         }
 
         #endregion
