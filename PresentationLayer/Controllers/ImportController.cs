@@ -56,13 +56,8 @@ namespace PresentationLayer.Controllers
                 {
                     throw new InvalidDataException("You must upload a file!");
                 }
-
-                //Save to a file
-                var pathToFile = ConfigurationManager.AppSettings.Get("ImportExcelPath");
-                var fullFilePath = pathToFile + "Import.xls";
-                file.SaveAs(fullFilePath);
                 
-                var importer = new ExcelReader(fullFilePath);
+                var importer = new ExcelReader(file);
 
                 return Json(importer.GetResult());
 

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using BusinessLayer.DbHandler;
 using ExcelLibrary.SpreadSheet;
 using Shared.Models;
@@ -16,7 +17,9 @@ namespace BusinessLayer.Excel
     {
         #region Private fields
 
-        private readonly string _fileName;    // The path to the file
+        private readonly string FileName;    // The path to the file
+        private readonly static string FolderLocation = Path.GetTempPath();
+
         private int _disciplineId;   // The PK of the discipline (which has to be in the Cell (r1,c1)
 
         private const int FirstDataRow = 2; // third row => Discipline name, headers, data
@@ -26,17 +29,33 @@ namespace BusinessLayer.Excel
 
         #endregion
 
+        #region Constructors
+
         public ExcelReader(string fileName)
         {
-            _fileName = fileName;
+            FileName = fileName;
+            Init();
+        }
+
+        public ExcelReader(HttpPostedFileBase file)
+        {
+            FileName = FolderLocation + "\\" + Guid.NewGuid().ToString();
+            file.SaveAs(FileName);
+            Init();
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void Init()
+        {
             ReadExcel();
             if (_result.SuccessfullyRead)
             {
                 Insert();
             }
         }
-
-        #region Private methods
 
         private void ReadExcel()
         {
@@ -49,7 +68,7 @@ namespace BusinessLayer.Excel
                 _result.TimesInserted = new List<TimeDTO>();
 
                 // open xls file 
-                var book = Workbook.Load(_fileName);
+                var book = Workbook.Load(FileName);
                 var sheet = book.Worksheets[0];
 
                 #region Discipline

@@ -23,8 +23,8 @@ namespace BusinessLayer.Excel
 
         #region Private properties
 
-        private static string _folderLocation => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        private static string _fileLocation => _folderLocation + "ExcelImport.xls";
+        private static string _folderLocation => Path.GetTempPath();
+        private static string _fileLocation => _folderLocation + @"\ExcelImport.xls";
 
         #endregion
 
