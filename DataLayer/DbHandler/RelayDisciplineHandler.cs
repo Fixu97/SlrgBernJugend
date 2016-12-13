@@ -5,7 +5,7 @@ using Shared.Models.db;
 
 namespace DataLayer.DbHandler
 {
-    public class RelayDisciplineHandler<T> : DbObjHandler<T> where T : RelayDisciplineDTO
+    public class RelayDisciplineHandler : DbObjHandler<RelayDisciplineDTO>
     {
         protected override string OrderBy => string.Empty;
 
@@ -13,7 +13,7 @@ namespace DataLayer.DbHandler
 
         protected override string TableName => "RELAYS_DISCIPLINES";
 
-        protected override Dictionary<string, string> GetAttributeValuePairs(T dbObj)
+        protected override Dictionary<string, string> GetAttributeValuePairs(RelayDisciplineDTO dbObj)
         {
             var relayDiscipline = dbObj;
             var dictionary = new Dictionary<string, string>();
@@ -25,10 +25,10 @@ namespace DataLayer.DbHandler
             return dictionary;
         }
 
-        protected override List<T> ReadParamterized(string cmd, List<string> parameters)
+        protected override List<RelayDisciplineDTO> ReadParamterized(string cmd, List<string> parameters)
         {
 
-            var relays = new List<T>();
+            var relays = new List<RelayDisciplineDTO>();
 
             using (SqlConnection con = new SqlConnection(_readerConnectionString))
             {
@@ -50,7 +50,7 @@ namespace DataLayer.DbHandler
                                 sqlReader.GetInt32(2),
                                 sqlReader.GetInt32(3)
                             );
-                            relays.Add((T)tmpRelayDiscipline);
+                            relays.Add((RelayDisciplineDTO)tmpRelayDiscipline);
                         }
                     }
                 }
@@ -73,7 +73,7 @@ namespace DataLayer.DbHandler
         /// </summary>
         /// <param name="relay"></param>
         /// <returns></returns>
-        public List<T> Select(RelayDTO relay)
+        public List<RelayDisciplineDTO> Select(RelayDTO relay)
         {
             var cmd = SelectStatement + " WHERE FK_R=@var0";
             var parameters = new List<string> { relay.Pk.ToString() };
@@ -85,8 +85,8 @@ namespace DataLayer.DbHandler
 
         public RelayDisciplineDTO GetRelayDisciplineDto(int pk, int fk_r, int fk_d, int position)
         {
-            var relayHandler = new RelayHandler<RelayDTO>();
-            var disciplineHandler = new DisciplineHandler<DisciplineDTO>();
+            var relayHandler = new RelayHandler();
+            var disciplineHandler = new DisciplineHandler();
 
             var relay = relayHandler.Select(fk_r);
             var discipline = disciplineHandler.Select(fk_d);
@@ -103,7 +103,7 @@ namespace DataLayer.DbHandler
         }
         public RelayDisciplineDTO GetRelayDisciplineDto(int pk, RelayDTO relay, int fk_d, int position)
         {
-            var disciplineHandler = new DisciplineHandler<DisciplineDTO>();
+            var disciplineHandler = new DisciplineHandler();
             var discipline = disciplineHandler.Select(fk_d);
 
             return new RelayDisciplineDTO

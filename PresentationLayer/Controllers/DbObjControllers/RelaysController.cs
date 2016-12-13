@@ -12,6 +12,7 @@ namespace PresentationLayer.Controllers.DbObjControllers
 {
     public class RelaysController : DbObjController<RelayDTO>
     {
+        private DbObjHandler<RelayDTO> _relayHandler = new DbRelayHandler();
 
         //
         // GET: /Relays/
@@ -20,7 +21,7 @@ namespace PresentationLayer.Controllers.DbObjControllers
         {
             get { return "Relays"; }
         }
-        protected override DbObjHandler<RelayDTO> BusinessLayer => new DbRelayHandler<RelayDTO>();
+        public override DbObjHandler<RelayDTO> BusinessLayer { protected get { return _relayHandler; } set { _relayHandler = value; } }
 
         public override ActionResult Index()
         {

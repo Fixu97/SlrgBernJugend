@@ -14,11 +14,11 @@ namespace PresentationLayer.Controllers.DbObjControllers
     {
         protected abstract string ControllerName { get; }
 
-        protected abstract DbObjHandler<T> BusinessLayer { get; }
+        public abstract DbObjHandler<T> BusinessLayer { protected get; set; }
 
         #region Public methods
         [HttpGet]
-        public ActionResult Create()
+        public virtual ActionResult Create()
         {
             if (ControllerName.IsNullOrWhiteSpace())
             {

@@ -6,7 +6,7 @@ using Shared.Models.db;
 
 namespace DataLayer.DbHandler
 {
-    public class RelayHandler<T> : DbObjHandler<T> where T : RelayDTO
+    public class RelayHandler : DbObjHandler<RelayDTO>
     {
         protected override string OrderBy => " ORDER BY RELAYS.Relay ASC, RELAYS.PK ASC";
 
@@ -16,7 +16,7 @@ namespace DataLayer.DbHandler
 
         protected override string TableName => "RELAYS";
 
-        protected override Dictionary<string, string> GetAttributeValuePairs(T dbObj)
+        protected override Dictionary<string, string> GetAttributeValuePairs(RelayDTO dbObj)
         {
             var relay = dbObj;
             var dictionary = new Dictionary<string, string>();
@@ -26,10 +26,10 @@ namespace DataLayer.DbHandler
             return dictionary;
         }
 
-        protected override List<T> ReadParamterized(string cmd, List<string> parameters)
+        protected override List<RelayDTO> ReadParamterized(string cmd, List<string> parameters)
         {
 
-            var relays = new List<T>();
+            var relays = new List<RelayDTO>();
 
             using (SqlConnection con = new SqlConnection(_readerConnectionString))
             {
@@ -56,8 +56,8 @@ namespace DataLayer.DbHandler
                             // if not, add the current relay to the list
                             if (existingRelay == null)
                             {
-                                relays.Add((T)tmpRelay);
-                                existingRelay = (T)tmpRelay;
+                                relays.Add((RelayDTO)tmpRelay);
+                                existingRelay = (RelayDTO)tmpRelay;
                             }
 
                             if (sqlReader.IsDBNull(2) || sqlReader.IsDBNull(3) || sqlReader.IsDBNull(4) || sqlReader.IsDBNull(5))

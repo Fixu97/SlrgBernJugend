@@ -17,9 +17,9 @@ namespace PresentationLayer.Controllers
     public class ChartController : JsonDataContractController
     {
 
-        private readonly DbPersonHandler<PersonDTO> _personHandler = new DbPersonHandler<PersonDTO>();
-        private readonly DbDisciplineHandler<DisciplineDTO> _disciplineHandler = new DbDisciplineHandler<DisciplineDTO>();
-        private readonly DbTimeHandler<TimeDTO> _timeHandler = new DbTimeHandler<TimeDTO>();
+        private readonly DbPersonHandler _personHandler = new DbPersonHandler();
+        private readonly DbDisciplineHandler _disciplineHandler = new DbDisciplineHandler();
+        private readonly DbTimeHandler _timeHandler = new DbTimeHandler();
 
         [HttpGet]
         public ActionResult GetChartsForPerson(int id)

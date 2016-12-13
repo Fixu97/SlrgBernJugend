@@ -8,13 +8,13 @@ using Shared.Models.db;
 
 namespace DataLayer.DbHandler
 {
-    public class DisciplineHandler<T> : DbObjHandler<T> where T : DisciplineDTO
+    public class DisciplineHandler : DbObjHandler<DisciplineDTO>
     {
         protected override string TableName => "DISCIPLINES";
         protected override string SelectStatement => $"SELECT * FROM {TableName} ";
         protected override string OrderBy => string.Empty;
 
-        protected override Dictionary<string, string> GetAttributeValuePairs(T dbObj)
+        protected override Dictionary<string, string> GetAttributeValuePairs(DisciplineDTO dbObj)
         {
             var discipline = (DisciplineDTO)dbObj;
             var dictionary = new Dictionary<string, string>();
@@ -25,10 +25,10 @@ namespace DataLayer.DbHandler
             return dictionary;
         }
 
-        protected override List<T> ReadParamterized(string cmd, List<string> parameters)
+        protected override List<DisciplineDTO> ReadParamterized(string cmd, List<string> parameters)
         {
 
-            var disciplines = new List<T>();
+            var disciplines = new List<DisciplineDTO>();
 
             using (SqlConnection con = new SqlConnection(_readerConnectionString))
             {
@@ -49,7 +49,7 @@ namespace DataLayer.DbHandler
                                 sqlReader.GetString(1),
                                 sqlReader.GetInt32(2)
                             );
-                            disciplines.Add((T)tmpDiscipline);
+                            disciplines.Add((DisciplineDTO)tmpDiscipline);
                         }
                     }
                 }

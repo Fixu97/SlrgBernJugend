@@ -9,7 +9,7 @@ using Shared.Models.db;
 
 namespace DataLayer.DbHandler
 {
-    public class PermissionHandler<T> : DbObjHandler<T> where T : PermissionDTO
+    public class PermissionHandler : DbObjHandler<PermissionDTO>
     {
 
         protected override string TableName => "PERMISSIONS";
@@ -18,7 +18,7 @@ namespace DataLayer.DbHandler
                                                      $"JOIN USERS AS U ON U.PK = {TableName}.FK_U ";
         protected override string OrderBy => string.Empty;
 
-        protected override Dictionary<string, string> GetAttributeValuePairs(T dbObj)
+        protected override Dictionary<string, string> GetAttributeValuePairs(PermissionDTO dbObj)
         {
             var permission = (PermissionDTO) dbObj;
             var dictionary = new Dictionary<string, string>();
@@ -29,10 +29,10 @@ namespace DataLayer.DbHandler
             return dictionary;
         }
 
-        protected override List<T> ReadParamterized(string cmd, List<string> parameters)
+        protected override List<PermissionDTO> ReadParamterized(string cmd, List<string> parameters)
         {
 
-            var permissions = new List<T>();
+            var permissions = new List<PermissionDTO>();
 
             using (SqlConnection con = new SqlConnection(_readerConnectionString))
             {
@@ -62,7 +62,7 @@ namespace DataLayer.DbHandler
                             var phoneNr = sqlReader.IsDBNull(8) ? "" : sqlReader.GetString(8);
                             var email = sqlReader.IsDBNull(9) ? "" : sqlReader.GetString(9);
 
-                            var personHandler = new PersonHandler<PersonDTO>();
+                            var personHandler = new PersonHandler();
 
                             // Fill up person object
                             tmpPermission.Person = personHandler.GetPersonDto(
@@ -75,9 +75,9 @@ namespace DataLayer.DbHandler
                                 phoneNr,
                                 email
                                 );
-                            permissions.Add((T)tmpPermission);
+                            permissions.Add((PermissionDTO)tmpPermission);
 
-                            var userHandler = new UserHandler<UserDTO>();
+                            var userHandler = new UserHandler();
 
                             // Fill up user object
                             tmpPermission.User = userHandler.GetUserDto(

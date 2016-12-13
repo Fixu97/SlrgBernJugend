@@ -9,11 +9,12 @@ namespace PresentationLayer.Controllers.DbObjControllers
 {
     public class PermissionsController : DbObjController<PermissionDTO>
     {
+        private DbObjHandler<PermissionDTO> _permissionHandler = new DbPermissionHandler();
         protected override string ControllerName
         {
             get { return "Permissions"; }
         }
-        protected override DbObjHandler<PermissionDTO> BusinessLayer => new DbPermissionHandler<PermissionDTO>();
+        public override DbObjHandler<PermissionDTO> BusinessLayer { protected get { return _permissionHandler; } set { _permissionHandler = value; } }
 
         public override ActionResult Index()
         {
@@ -114,8 +115,8 @@ namespace PresentationLayer.Controllers.DbObjControllers
                 FK_U = int.Parse(collection["FK_U"])
             };
 
-            var personHandler = new DbPersonHandler<PersonDTO>();
-            var userHandler = new DbUserHandler<UserDTO>();
+            var personHandler = new DbPersonHandler();
+            var userHandler = new DbUserHandler();
 
             permission.Person = (PersonDTO) personHandler.Select(permission.FK_P);
             permission.User = (UserDTO) userHandler.Select(permission.FK_U);

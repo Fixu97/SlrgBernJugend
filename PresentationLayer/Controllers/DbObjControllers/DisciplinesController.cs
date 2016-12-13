@@ -10,16 +10,17 @@ namespace PresentationLayer.Controllers.DbObjControllers
 {
     public class DisciplinesController : DbObjController<DisciplineDTO>
     {
-
-        //
-        // GET: /Disciplines/
+        private DbObjHandler<DisciplineDTO> _disciplineHandler = new DbDisciplineHandler();
 
         protected override string ControllerName
         {
             get { return "Disciplines"; }
         }
 
-        protected override DbObjHandler<DisciplineDTO> BusinessLayer => new DbDisciplineHandler<DisciplineDTO>();
+        public override DbObjHandler<DisciplineDTO> BusinessLayer { protected get { return _disciplineHandler; } set { _disciplineHandler = value; } }
+
+        //
+        // GET: /Disciplines/
 
         public override ActionResult Index()
         {

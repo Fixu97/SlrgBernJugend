@@ -8,17 +8,17 @@ using Shared.Models.db;
 
 namespace DataLayer.DbHandler
 {
-    public class UserHandler<T> : DbObjHandler<T> where T : UserDTO
+    public class UserHandler : DbObjHandler<UserDTO>
     {
 
         protected override string TableName => "USERS";
         protected override string SelectStatement => $"SELECT * FROM {TableName} ";
         protected override string OrderBy => string.Empty;
 
-        public override void Insert(T dbObj)
+        public override void Insert(UserDTO dbObj)
         {
             var user = dbObj;
-            var allUsers = new List<T>();
+            var allUsers = new List<UserDTO>();
             var allDbObjs = GetAll();
             allDbObjs.ForEach(u => allUsers.Add(u));
 
@@ -46,7 +46,7 @@ namespace DataLayer.DbHandler
             }
         }
 
-        protected override Dictionary<string, string> GetAttributeValuePairs(T dbObj)
+        protected override Dictionary<string, string> GetAttributeValuePairs(UserDTO dbObj)
         {
             var permission = (UserDTO)dbObj;
             var dictionary = new Dictionary<string, string>();
@@ -60,10 +60,10 @@ namespace DataLayer.DbHandler
             return dictionary;
         }
 
-        protected override List<T> ReadParamterized(string cmd, List<string> parameters)
+        protected override List<UserDTO> ReadParamterized(string cmd, List<string> parameters)
         {
 
-            var users = new List<T>();
+            var users = new List<UserDTO>();
 
             using (SqlConnection con = new SqlConnection(_readerConnectionString))
             {
@@ -87,7 +87,7 @@ namespace DataLayer.DbHandler
                                 sqlReader.GetString(4), 
                                 sqlReader.GetBoolean(5)
                                 );
-                            users.Add((T)tmpUser);
+                            users.Add((UserDTO)tmpUser);
                             }
                         }
                         con.Close();

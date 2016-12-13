@@ -7,49 +7,49 @@ using Shared.Models.db;
 
 namespace BusinessLayer.DbHandler
 {
-    public class DbTimeHandler<T> : DbObjHandler<T> where T : TimeDTO
+    public class DbTimeHandler: DbObjHandler<TimeDTO>
     {
-        protected override DataLayer.DbHandler.DbObjHandler<T> _db => new DataLayer.DbHandler.TimeHandler<T>();
+        protected override DataLayer.DbHandler.DbObjHandler<TimeDTO> _db => new DataLayer.DbHandler.TimeHandler();
 
 
-        public List<T> GetTimesByPeople(List<PersonDTO> people)
+        public List<TimeDTO> GetTimesByPeople(List<PersonDTO> people)
         {
-            var db = (DataLayer.DbHandler.TimeHandler<T>) _db;
+            var db = (DataLayer.DbHandler.TimeHandler)_db;
             var times = db.GetTimesByPeople(people);
             _sortTimesByDate(times);
             return times;
         }
-        public List<T> GetTimesByPeople(List<PersonDTO> people, DisciplineDTO discipline)
+        public List<TimeDTO> GetTimesByPeople(List<PersonDTO> people, DisciplineDTO discipline)
         {
-            var db = (DataLayer.DbHandler.TimeHandler<T>)_db;
+            var db = (DataLayer.DbHandler.TimeHandler)_db;
             return db.GetTimesByPeople(people, discipline);
         }
-        public List<T> GetTimesByPeople(List<PersonDTO> people, DisciplineDTO discipline, DateTime[] timescope)
+        public List<TimeDTO> GetTimesByPeople(List<PersonDTO> people, DisciplineDTO discipline, DateTime[] timescope)
         {
-            var db = (DataLayer.DbHandler.TimeHandler<T>)_db;
+            var db = (DataLayer.DbHandler.TimeHandler)_db;
             return db.GetTimesByPeople(people, discipline, _getTimescope(timescope));
         }
-        public List<T> GetTimesByDiscipline(List<DisciplineDTO> disciplines)
+        public List<TimeDTO> GetTimesByDiscipline(List<DisciplineDTO> disciplines)
         {
-            var db = (DataLayer.DbHandler.TimeHandler<T>)_db;
+            var db = (DataLayer.DbHandler.TimeHandler)_db;
             return db.GetTimesByDisciplines(disciplines);
         }
-        public List<T> GetTimesByDiscipline(List<DisciplineDTO> disciplines, bool male)
+        public List<TimeDTO> GetTimesByDiscipline(List<DisciplineDTO> disciplines, bool male)
         {
-            var db = (DataLayer.DbHandler.TimeHandler<T>)_db;
+            var db = (DataLayer.DbHandler.TimeHandler)_db;
             var times = db.GetTimesByDisciplines(disciplines);
             times = times.Where(t => t.Person.Male == male).ToList();
 
             return times;
         }
-        public List<T> GetTimesByDiscipline(List<DisciplineDTO> disciplines, PersonDTO person)
+        public List<TimeDTO> GetTimesByDiscipline(List<DisciplineDTO> disciplines, PersonDTO person)
         {
-            var db = (DataLayer.DbHandler.TimeHandler<T>)_db;
+            var db = (DataLayer.DbHandler.TimeHandler)_db;
             return db.GetTimesByDisciplines(disciplines, person);
         }
-        public List<T> GetTimesByDiscipline(List<DisciplineDTO> disciplines, PersonDTO person, DateTime[] timescope)
+        public List<TimeDTO> GetTimesByDiscipline(List<DisciplineDTO> disciplines, PersonDTO person, DateTime[] timescope)
         {
-            var db = (DataLayer.DbHandler.TimeHandler<T>)_db;
+            var db = (DataLayer.DbHandler.TimeHandler)_db;
             return db.GetTimesByDisciplines(disciplines, person, _getTimescope(timescope));
         }
 
@@ -59,9 +59,9 @@ namespace BusinessLayer.DbHandler
         /// <param name="n">How many people should be displayed</param>
         /// <param name="discipline">The discipline</param>
         /// <returns>The n fastest people for the specified discipline</returns>
-        public T[] GetTopNPeopleForDiscipline(int n, DisciplineDTO discipline)
+        public TimeDTO[] GetTopNPeopleForDiscipline(int n, DisciplineDTO discipline)
         {
-            var db = (DataLayer.DbHandler.TimeHandler<T>)_db;
+            var db = (DataLayer.DbHandler.TimeHandler)_db;
             var allTimes = db.GetTimesByDisciplines(new List<DisciplineDTO> { discipline });
             return GetTopNUniquePeople(n, allTimes);
         }
@@ -71,18 +71,18 @@ namespace BusinessLayer.DbHandler
         /// <param name="n">How many people should be displayed</param>
         /// <param name="discipline">The discipline</param>
         /// <returns>The n fastest people for the specified discipline</returns>
-        public T[] GetTopNPeopleForDiscipline(int n, DisciplineDTO discipline, bool male)
+        public TimeDTO[] GetTopNPeopleForDiscipline(int n, DisciplineDTO discipline, bool male)
         {
-            var db = (DataLayer.DbHandler.TimeHandler<T>)_db;
+            var db = (DataLayer.DbHandler.TimeHandler)_db;
             var allTimes = db.GetTimesByDisciplines(new List<DisciplineDTO> { discipline });
             var genderSeparatedTimes = allTimes.Where(t => t.Person.Male == male).ToList();
             return GetTopNUniquePeople(n, genderSeparatedTimes);
         }
 
-        private T[] GetTopNUniquePeople(int n, List<T> allTimes)
+        private TimeDTO[] GetTopNUniquePeople(int n, List<TimeDTO> allTimes)
         {
             var sortedTimes = allTimes.OrderBy(x => x.Seconds).ThenByDescending(x => x.Date);
-            var topN = new T[n];
+            var topN = new TimeDTO[n];
 
             int j = 0;
             for (var i = 0; i < n; i++)
@@ -113,20 +113,20 @@ namespace BusinessLayer.DbHandler
         /// <param name="person">The person</param>
         /// <param name="discipline">The discipline</param>
         /// <returns>A single <see cref="TimeDTO"/> object</returns>
-        public T GetHighscoreForPersonForDiscipline(PersonDTO person, DisciplineDTO discipline)
+        public TimeDTO GetHighscoreForPersonForDiscipline(PersonDTO person, DisciplineDTO discipline)
         {
-            var db = (DataLayer.DbHandler.TimeHandler<T>)_db;
+            var db = (DataLayer.DbHandler.TimeHandler)_db;
             var allTimes = db.GetTimesByDisciplines(new List<DisciplineDTO> { discipline }, person);
             var sortedTimes = allTimes.OrderBy(x => x.Seconds).ThenByDescending(x => x.Date);
 
             return sortedTimes.FirstOrDefault();
         }
-        private List<T> _sortTimesBySeconds(List<T> times)
+        private List<TimeDTO> _sortTimesBySeconds(List<TimeDTO> times)
         {
             times.Sort((x, y) => decimal.Compare(x.Seconds, y.Seconds));
             return times;
         }
-        private List<T> _sortTimesByDate(List<T> times)
+        private List<TimeDTO> _sortTimesByDate(List<TimeDTO> times)
         {
             times.Sort((x, y) => DateTime.Compare(x.Date, y.Date));
             return times;

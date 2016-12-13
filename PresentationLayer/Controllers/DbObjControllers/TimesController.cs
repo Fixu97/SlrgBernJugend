@@ -11,12 +11,18 @@ namespace PresentationLayer.Controllers.DbObjControllers
 {
     public class TimesController : DbObjController<TimeDTO>
     {
+        private DbObjHandler<TimeDTO> _timeHandler = new DbTimeHandler();
+        private DbObjHandler<DisciplineDTO> _disciplineHandler = new DbDisciplineHandler();
+        private DbObjHandler<PersonDTO> _personHandler = new DbPersonHandler();
+
         protected override string ControllerName
         {
             get { return "Times"; }
         }
 
-        protected override DbObjHandler<TimeDTO> BusinessLayer => new DbTimeHandler<TimeDTO>();
+        public override DbObjHandler<TimeDTO> BusinessLayer { protected get { return _timeHandler; } set { _timeHandler = value; } }
+        public DbObjHandler<PersonDTO> PersonHandler { private get { return _personHandler; } set { _personHandler = value; } }
+        public DbObjHandler<DisciplineDTO> DisciplineHandler { private get { return _disciplineHandler; } set { _disciplineHandler = value; } }
 
         [HttpGet]
         public override ActionResult Index()
@@ -70,6 +76,22 @@ namespace PresentationLayer.Controllers.DbObjControllers
                 throw new Exception("An error occoured while trying to delete this entry!", e);
             }
         }
+
+        [HttpGet]
+        public ActionResult CreateByDiscipline(int id)
+        {
+            var discipline = DisciplineHandler.Select(id);
+            var people = PersonHandler.GetAll();
+
+            var model = new InsertTimesByDisciplineModel
+            {
+                Discipline = discipline,
+                People = people
+            };
+
+            return View("~/Views/DbObjViews/Times/CreateByDiscipline.cshtml", model);
+        }
+
         [HttpPost]
         public override ActionResult GetAll()
         {
@@ -80,9 +102,8 @@ namespace PresentationLayer.Controllers.DbObjControllers
         [HttpPost]
         public ActionResult GetTimesByPerson(int id)
         {
-            var personHandler = new DbPersonHandler<PersonDTO>();
-            var person = personHandler.Select(id);
-            var db = BusinessLayer as DbTimeHandler<TimeDTO>;
+            var person = PersonHandler.Select(id);
+            var db = BusinessLayer as DbTimeHandler;
             var times = db.GetTimesByPeople(new List<PersonDTO>() { person });
             return Json(times);
         }
@@ -91,9 +112,8 @@ namespace PresentationLayer.Controllers.DbObjControllers
         public ActionResult GetChartsForPerson(int id)
         {
             var factory = new ChartFactory();
-            var personHandler = new DbPersonHandler<PersonDTO>();
-            var person = personHandler.Select(id);
-            var db = BusinessLayer as DbTimeHandler<TimeDTO>;
+            var person = PersonHandler.Select(id);
+            var db = BusinessLayer as DbTimeHandler;
             var times = db.GetTimesByPeople(new List<PersonDTO>() { person });
             var charts = factory.CreateChartDataModels_Person(times);
 
@@ -105,13 +125,9 @@ namespace PresentationLayer.Controllers.DbObjControllers
         {
             try
             {
-                var personHandler = new DbPersonHandler<PersonDTO>();
-                var disciplineHandler = new DbDisciplineHandler<DisciplineDTO>();
-                var timesHandler = new DbTimeHandler<TimeDTO>();
-
-                var person = (PersonDTO) personHandler.Select(personId);
-                var discipline = (DisciplineDTO) disciplineHandler.Select(disciplineId);
-                var highscore = timesHandler.GetHighscoreForPersonForDiscipline(person, discipline);
+                var person = PersonHandler.Select(personId);
+                var discipline = DisciplineHandler.Select(disciplineId);
+                var highscore = ((DbTimeHandler)BusinessLayer).GetHighscoreForPersonForDiscipline(person, discipline);
                 return Json(highscore, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
@@ -126,11 +142,8 @@ namespace PresentationLayer.Controllers.DbObjControllers
         {
             try
             {
-                var disciplineHandler = new DbDisciplineHandler<DisciplineDTO>();
-                var timesHandler = new DbTimeHandler<TimeDTO>();
-
-                var discipline = (DisciplineDTO) disciplineHandler.Select(disciplineId);
-                var topN = timesHandler.GetTopNPeopleForDiscipline(n, discipline);
+                var discipline = DisciplineHandler.Select(disciplineId);
+                var topN = ((DbTimeHandler)BusinessLayer).GetTopNPeopleForDiscipline(n, discipline);
                 return Json(topN, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
@@ -145,11 +158,8 @@ namespace PresentationLayer.Controllers.DbObjControllers
         {
             try
             {
-                var disciplineHandler = new DbDisciplineHandler<DisciplineDTO>();
-                var timesHandler = new DbTimeHandler<TimeDTO>();
-
-                var discipline = (DisciplineDTO)disciplineHandler.Select(disciplineId);
-                var topN = timesHandler.GetTopNPeopleForDiscipline(n, discipline, male);
+                var discipline = DisciplineHandler.Select(disciplineId);
+                var topN = ((DbTimeHandler)BusinessLayer).GetTopNPeopleForDiscipline(n, discipline, male);
                 return Json(topN, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
@@ -184,11 +194,8 @@ namespace PresentationLayer.Controllers.DbObjControllers
                 Seconds = decimal.Parse(collection["Seconds"])
             };
 
-            var personHandler = new DbPersonHandler<PersonDTO>();
-            var disciplineHandler = new DbDisciplineHandler<DisciplineDTO>();
-
-            time.Person = (PersonDTO) personHandler.Select(time.FK_P);
-            time.Discipline = (DisciplineDTO) disciplineHandler.Select(time.FK_D);
+            time.Person = PersonHandler.Select(time.FK_P);
+            time.Discipline = DisciplineHandler.Select(time.FK_D);
 
             return time;
         }

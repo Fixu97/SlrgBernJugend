@@ -7,12 +7,12 @@ using Shared.Models.db;
 
 namespace BusinessLayer.DbHandler
 {
-    public class DbUserHandler<T> : DbObjHandler<T> where T : UserDTO
+    public class DbUserHandler : DbObjHandler<UserDTO>
     {
-        protected override DataLayer.DbHandler.DbObjHandler<T> _db => new DataLayer.DbHandler.UserHandler<T>();
+        protected override DataLayer.DbHandler.DbObjHandler<UserDTO> _db => new DataLayer.DbHandler.UserHandler();
         public UserDTO GetUserByCredentials(string username, string password)
         {
-            var db = (DataLayer.DbHandler.UserHandler<T>) _db;
+            var db = (DataLayer.DbHandler.UserHandler) _db;
             return db.GetUserByCredentials(username, password);
         }
     }

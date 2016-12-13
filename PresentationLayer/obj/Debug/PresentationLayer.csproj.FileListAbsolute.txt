@@ -185,7 +185,6 @@ D:\dev\SlrgBernJugendZeitenanalyse\PresentationLayer\obj\Debug\PresentationLayer
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\PresentationLayer.dll.config
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\PresentationLayer.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\PresentationLayer.pdb
-D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\Antlr3.Runtime.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\BusinessLayer.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\DotNetOpenAuth.AspNet.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\DotNetOpenAuth.Core.dll
@@ -198,6 +197,7 @@ D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\EntityFramework.SqlServer.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\log4net.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\Microsoft.Data.Edm.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\Microsoft.Data.OData.dll
+D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\Microsoft.Web.Helpers.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\Microsoft.Web.Infrastructure.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\Microsoft.Web.WebPages.OAuth.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\Newtonsoft.Json.dll
@@ -217,15 +217,12 @@ D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\System.Web.WebPages.Deployment.d
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\System.Web.WebPages.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\System.Web.WebPages.Razor.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\WebGrease.dll
-D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\WebMatrix.Data.dll
-D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\WebMatrix.WebData.dll
-D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\ExcelLibrary.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\DataLayer.dll
+D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\ExcelLibrary.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\Org.Mentalis.Security.Cryptography.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\Mono.Math.dll
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\BusinessLayer.pdb
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\Shared.pdb
-D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\Antlr3.Runtime.pdb
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\DotNetOpenAuth.AspNet.xml
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\DotNetOpenAuth.Core.xml
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\DotNetOpenAuth.OAuth.xml
@@ -252,8 +249,6 @@ D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\System.Web.Razor.xml
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\System.Web.WebPages.xml
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\System.Web.WebPages.Deployment.xml
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\System.Web.WebPages.Razor.xml
-D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\WebMatrix.Data.xml
-D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\WebMatrix.WebData.xml
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\DataLayer.pdb
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\Org.Mentalis.Security.Cryptography.xml
 D:\dev\Git\SlrgBernJugend\PresentationLayer\bin\Mono.Math.xml

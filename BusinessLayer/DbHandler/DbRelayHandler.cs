@@ -7,8 +7,8 @@ using Shared.Models.db;
 
 namespace BusinessLayer.DbHandler
 {
-    public class DbRelayHandler<T> : DbObjHandler<T> where T : RelayDTO
+    public class DbRelayHandler : DbObjHandler<RelayDTO>
     {
-        protected override DataLayer.DbHandler.DbObjHandler<T> _db => new DataLayer.DbHandler.RelayHandler<T>();
+        protected override DataLayer.DbHandler.DbObjHandler<RelayDTO> _db => new DataLayer.DbHandler.RelayHandler();
     }
 }

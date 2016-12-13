@@ -17,8 +17,8 @@ namespace PresentationLayer.Controllers
 {
     public class ImportController : JsonDataContractController
     {
-        private readonly DbPersonHandler<PersonDTO> _personHandler = new DbPersonHandler<PersonDTO>();
-        private readonly DbDisciplineHandler<DisciplineDTO> _disciplineHandler = new DbDisciplineHandler<DisciplineDTO>();
+        private readonly DbPersonHandler _personHandler = new DbPersonHandler();
+        private readonly DbDisciplineHandler _disciplineHandler = new DbDisciplineHandler();
 
         [HttpGet]
         public ActionResult Index()

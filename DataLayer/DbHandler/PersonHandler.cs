@@ -9,14 +9,14 @@ using Shared.Models.db;
 
 namespace DataLayer.DbHandler
 {
-    public class PersonHandler<T> : DbObjHandler<T> where T : PersonDTO
+    public class PersonHandler : DbObjHandler<PersonDTO>
     {
         private bool _onlyActive = true;
         protected override string TableName => "PEOPLE";
         protected override string SelectStatement => $"SELECT * FROM {TableName} ";
         protected override string OrderBy => "ORDER BY Prename ASC, Lastname ASC";
 
-        public override void Insert(T dbObj)
+        public override void Insert(PersonDTO dbObj)
         {
             string paramList = "";
 
@@ -35,7 +35,7 @@ namespace DataLayer.DbHandler
         /// </summary>
         /// <param name="onlyActive">True if only the active, false if all</param>
         /// <returns>A list of all people</returns>
-        public List<T> GetAll(bool onlyActive = true)
+        public List<PersonDTO> GetAll(bool onlyActive = true)
         {
             _onlyActive = onlyActive;
             var people = base.GetAll();
@@ -43,7 +43,7 @@ namespace DataLayer.DbHandler
             return people;
         } 
 
-        protected override Dictionary<string, string> GetAttributeValuePairs(T dbObj)
+        protected override Dictionary<string, string> GetAttributeValuePairs(PersonDTO dbObj)
         {
             var person = dbObj;
             var dictionary = new Dictionary<string, string>();
@@ -59,10 +59,10 @@ namespace DataLayer.DbHandler
             return dictionary;
         }
 
-        protected override List<T> ReadParamterized(string cmd, List<string> parameters)
+        protected override List<PersonDTO> ReadParamterized(string cmd, List<string> parameters)
         {
 
-            var people = new List<T>();
+            var people = new List<PersonDTO>();
 
             using (SqlConnection con = new SqlConnection(_readerConnectionString))
             {
@@ -90,7 +90,7 @@ namespace DataLayer.DbHandler
                             phoneNr,
                             email
                         );
-                        people.Add((T)tmpPerson);
+                        people.Add((PersonDTO)tmpPerson);
                     }
                     con.Close();
                 }

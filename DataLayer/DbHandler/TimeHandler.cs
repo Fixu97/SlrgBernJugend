@@ -8,8 +8,14 @@ using Shared.Models.db;
 
 namespace DataLayer.DbHandler
 {
-    public class TimeHandler<T> : DbObjHandler<T> where T : TimeDTO
+    public class TimeHandler : DbObjHandler<TimeDTO>
     {
+        private DisciplineHandler _disciplineHandler = new DisciplineHandler();
+        private PersonHandler _personHandler = new PersonHandler();
+
+        public DisciplineHandler DisciplineHandler { protected get { return _disciplineHandler; } set { _disciplineHandler = value; } }
+        public PersonHandler PersonHandler { protected get { return _personHandler; } set { _personHandler = value; } }
+
         private string _activePeopleClause = " P.Active = 1 ";
         protected override string TableName => "TIMES";
 
@@ -20,13 +26,13 @@ namespace DataLayer.DbHandler
                 $"JOIN DISCIPLINES AS D ON D.PK = {TableName}.FK_D ";
         protected override string OrderBy => " ORDER BY [Date] ASC, FK_D, FK_P, Seconds";
 
-        public List<T> GetAll(bool onlyActive = true)
+        public List<TimeDTO> GetAll(bool onlyActive = true)
         {
             var cmd = AssembleQuery($"WHERE {_activePeopleClause}");
             return ReadParamterized(cmd, new List<string>());
         }
 
-        protected override Dictionary<string, string> GetAttributeValuePairs(T dbObj)
+        protected override Dictionary<string, string> GetAttributeValuePairs(TimeDTO dbObj)
         {
             var time = dbObj;
             var dictionary = new Dictionary<string, string>();
@@ -39,11 +45,9 @@ namespace DataLayer.DbHandler
             return dictionary;
         }
 
-        protected override List<T> ReadParamterized(string cmd, List<string> parameters)
+        protected override List<TimeDTO> ReadParamterized(string cmd, List<string> parameters)
         {
-            var personHandler = new PersonHandler<PersonDTO>();
-            var disciplineHandler = new DisciplineHandler<DisciplineDTO>();
-            var times = new List<T>();
+            var times = new List<TimeDTO>();
 
             using (SqlConnection con = new SqlConnection(_readerConnectionString))
             {
@@ -72,7 +76,7 @@ namespace DataLayer.DbHandler
                             var email = sqlReader.IsDBNull(11) ? "" : sqlReader.GetString(11);
 
                             // Fill up person object
-                            tmpTime.Person = personHandler.GetPersonDto(
+                            tmpTime.Person = PersonHandler.GetPersonDto(
                                 tmpTime.FK_P, 
                                 sqlReader.GetString(5), 
                                 sqlReader.GetString(6),
@@ -84,13 +88,13 @@ namespace DataLayer.DbHandler
                                 );
 
                             // Fill up discipline object
-                            tmpTime.Discipline = disciplineHandler.GetDisciplineDto(
+                            tmpTime.Discipline = DisciplineHandler.GetDisciplineDto(
                                 tmpTime.FK_D,
                                 sqlReader.GetString(12),
                                 sqlReader.GetInt32(13)
                                 );
 
-                            times.Add((T)tmpTime);
+                            times.Add((TimeDTO)tmpTime);
                         }
                     }
                 }
@@ -108,7 +112,7 @@ namespace DataLayer.DbHandler
             return times;
         }
 
-        public T GetTimeDto(int pk, int fk_p, int fk_d, decimal seconds, DateTime date)
+        public TimeDTO GetTimeDto(int pk, int fk_p, int fk_d, decimal seconds, DateTime date)
         {
             var time = new TimeDTO
             {
@@ -118,10 +122,10 @@ namespace DataLayer.DbHandler
                 Seconds = seconds,
                 Date = date
             };
-            return (T)time;
+            return (TimeDTO)time;
         }
 
-        public List<T> GetTimesByPeople(List<PersonDTO> personDtos)
+        public List<TimeDTO> GetTimesByPeople(List<PersonDTO> personDtos)
         {
 
             var whereStatement = "WHERE (";
@@ -137,15 +141,15 @@ namespace DataLayer.DbHandler
 
             var cmd = AssembleQuery(whereStatement);
 
-            var times = new List<T>();
+            var times = new List<TimeDTO>();
             var dbObjs = ReadParamterized(cmd, parameters);
-            dbObjs.ForEach(t => times.Add(t));
+            dbObjs.ForEach(TimeDTO => times.Add(TimeDTO));
 
             return times;
 
 
         }
-        public List<T> GetTimesByPeople(List<PersonDTO> personDtos, DisciplineDTO disciplineDto)
+        public List<TimeDTO> GetTimesByPeople(List<PersonDTO> personDtos, DisciplineDTO disciplineDto)
         {
 
             var whereStatement = "WHERE (";
@@ -163,15 +167,15 @@ namespace DataLayer.DbHandler
 
             var cmd = AssembleQuery(whereStatement);
 
-            var times = new List<T>();
+            var times = new List<TimeDTO>();
             var dbObjs = ReadParamterized(cmd, parameters);
-            dbObjs.ForEach(t => times.Add(t));
+            dbObjs.ForEach(TimeDTO => times.Add(TimeDTO));
 
             return times;
 
 
         }
-        public List<T> GetTimesByPeople(List<PersonDTO> personDtos, DisciplineDTO disciplineDto, DateTime[] timeScope)
+        public List<TimeDTO> GetTimesByPeople(List<PersonDTO> personDtos, DisciplineDTO disciplineDto, DateTime[] timeScope)
         {
 
             var whereStatement = "WHERE (";
@@ -190,15 +194,15 @@ namespace DataLayer.DbHandler
 
             var cmd = AssembleQuery(whereStatement);
 
-            var times = new List<T>();
+            var times = new List<TimeDTO>();
             var dbObjs = ReadParamterized(cmd, parameters);
-            dbObjs.ForEach(t => times.Add(t));
+            dbObjs.ForEach(TimeDTO => times.Add(TimeDTO));
 
             return times;
 
 
         }
-        public List<T> GetTimesByDisciplines(List<DisciplineDTO> disciplineDtos)
+        public List<TimeDTO> GetTimesByDisciplines(List<DisciplineDTO> disciplineDtos)
         {
 
             var whereStatement = "WHERE (";
@@ -214,13 +218,13 @@ namespace DataLayer.DbHandler
 
             var cmd = AssembleQuery(whereStatement);
 
-            var times = new List<T>();
+            var times = new List<TimeDTO>();
             var dbObjs = ReadParamterized(cmd, parameters);
-            dbObjs.ForEach(t => times.Add(t));
+            dbObjs.ForEach(TimeDTO => times.Add(TimeDTO));
 
             return times;
         }
-        public List<T> GetTimesByDisciplines(List<DisciplineDTO> disciplineDtos, PersonDTO personDto)
+        public List<TimeDTO> GetTimesByDisciplines(List<DisciplineDTO> disciplineDtos, PersonDTO personDto)
         {
 
             var whereStatement = "WHERE (";
@@ -238,13 +242,13 @@ namespace DataLayer.DbHandler
 
             var cmd = AssembleQuery(whereStatement);
 
-            var times = new List<T>();
+            var times = new List<TimeDTO>();
             var dbObjs = ReadParamterized(cmd, parameters);
-            dbObjs.ForEach(t => times.Add(t));
+            dbObjs.ForEach(TimeDTO => times.Add(TimeDTO));
 
             return times;
         }
-        public List<T> GetTimesByDisciplines(List<DisciplineDTO> disciplineDtos, PersonDTO personDto, DateTime[] timeScope)
+        public List<TimeDTO> GetTimesByDisciplines(List<DisciplineDTO> disciplineDtos, PersonDTO personDto, DateTime[] timeScope)
         {
 
             var whereStatement = "WHERE (";
@@ -263,9 +267,9 @@ namespace DataLayer.DbHandler
 
             var cmd = AssembleQuery(whereStatement);
 
-            var times = new List<T>();
+            var times = new List<TimeDTO>();
             var dbObjs = ReadParamterized(cmd, parameters);
-            dbObjs.ForEach(t => times.Add(t));
+            dbObjs.ForEach(TimeDTO => times.Add(TimeDTO));
 
             return times;
         }

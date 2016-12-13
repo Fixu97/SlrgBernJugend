@@ -16,7 +16,7 @@ namespace PresentationLayer.Controllers
 {
     public class LoginController : Controller
     {
-        private DbUserHandler<UserDTO> BusinessLayer = new DbUserHandler<UserDTO>();
+        private DbUserHandler BusinessLayer = new DbUserHandler();
         //
         // GET: /Login/
         [HttpGet]

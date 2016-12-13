@@ -11,12 +11,15 @@ namespace PresentationLayer.Controllers.DbObjControllers
 {
     public class UsersController : DbObjController<UserDTO>
     {
+
+        private DbObjHandler<UserDTO> _userHandler = new DbUserHandler();
+
         protected override string ControllerName
         {
             get { return "Users"; }
         }
 
-        protected override DbObjHandler<UserDTO> BusinessLayer => new DbUserHandler<UserDTO>();
+        public override DbObjHandler<UserDTO> BusinessLayer { protected get { return _userHandler; } set { _userHandler = value; } }
 
         [HttpGet]
         public override ActionResult Index()

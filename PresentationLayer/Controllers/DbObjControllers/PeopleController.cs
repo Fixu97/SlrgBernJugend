@@ -14,6 +14,8 @@ namespace PresentationLayer.Controllers.DbObjControllers
     public class PeopleController : DbObjController<PersonDTO>
     {
 
+        private DbObjHandler<PersonDTO> _personHandler = new DbPersonHandler();
+
         //
         // GET: /People/
 
@@ -21,7 +23,7 @@ namespace PresentationLayer.Controllers.DbObjControllers
         {
             get { return "People"; }
         }
-        protected override DbObjHandler<PersonDTO> BusinessLayer { get { return new DbPersonHandler<PersonDTO>(); } }
+        public override DbObjHandler<PersonDTO> BusinessLayer { protected get { return _personHandler; } set { _personHandler = value; } }
 
         public override ActionResult Index()
         {
@@ -51,7 +53,7 @@ namespace PresentationLayer.Controllers.DbObjControllers
         {
             try
             {
-                var businessLayer = (DbPersonHandler<PersonDTO>)BusinessLayer;
+                var businessLayer = (DbPersonHandler)BusinessLayer;
                 var dbObjs = businessLayer.GetAll(!showInactive);
                 var people = new List<PersonDTO>();
                 dbObjs.ForEach(d => people.Add((PersonDTO)d));

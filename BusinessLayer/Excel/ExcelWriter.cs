@@ -8,6 +8,7 @@ using Shared.Models.db;
 using ExcelLibrary.SpreadSheet;
 using ExcelLibrary.CompoundDocumentFormat;
 using QiHe.CodeLib;
+using DataLayer.DbHandler;
 
 namespace BusinessLayer.Excel
 {
@@ -25,8 +26,11 @@ namespace BusinessLayer.Excel
 
         private static string _folderLocation => Path.GetTempPath();
         private static string _fileLocation => _folderLocation + @"\ExcelImport.xls";
+                private TimeHandler _timeHandler = new TimeHandler();
 
         #endregion
+
+        public TimeHandler TimeHandler { protected get { return _timeHandler; } set { _timeHandler = value; } }
 
         #region Constructors
 
@@ -41,8 +45,7 @@ namespace BusinessLayer.Excel
             this._dates = dates;
 
             // get all people
-            var bu = new DbTimeHandler<TimeDTO>();
-            var dbObj = bu.GetAll();
+            var dbObj = TimeHandler.GetAll();
 
             dbObj.ForEach(t => _people.Add(t.Person));
 

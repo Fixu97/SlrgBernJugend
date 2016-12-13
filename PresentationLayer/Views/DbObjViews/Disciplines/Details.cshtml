@@ -16,3 +16,11 @@
         @Html.Raw(Model.Meters)
     </td>
 </tr>
+<script>
+    $(document).ready(function () {
+        var btnEdit = $($("#edit")[0]);
+        var btnCreateByDisc = $("<button class='btn btn-primary' style='float:right;'onclick='document.location=\"/Times/CreateByDiscipline/@Model.Pk\"' title='Insert times for this discipline'>Insert times...</button>");
+
+        btnEdit.after(btnCreateByDisc);
+    });
+</script>

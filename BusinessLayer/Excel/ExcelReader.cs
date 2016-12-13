@@ -10,6 +10,7 @@ using BusinessLayer.DbHandler;
 using ExcelLibrary.SpreadSheet;
 using Shared.Models;
 using Shared.Models.db;
+using DataLayer.DbHandler;
 
 namespace BusinessLayer.Excel
 {
@@ -27,7 +28,11 @@ namespace BusinessLayer.Excel
 
         private readonly ResultModel _result = new ResultModel();
 
+        private TimeHandler _timeHandler = new TimeHandler();
+
         #endregion
+
+        public TimeHandler TimeHandler { protected get { return _timeHandler; } set { _timeHandler = value; } }
 
         #region Constructors
 
@@ -151,10 +156,9 @@ namespace BusinessLayer.Excel
         {
             try
             {
-                var bu = new DbTimeHandler<TimeDTO>();
                 foreach (var time in _result.TimesInserted)
                 {
-                    bu.Insert(time);
+                    TimeHandler.Insert(time);
                 }
                 _result.SuccessfullyInserted = true;
             }

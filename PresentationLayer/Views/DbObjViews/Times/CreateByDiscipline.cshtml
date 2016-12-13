@@ -1,0 +1,24 @@
+﻿@using Shared.Models.db
+@model PresentationLayer.Models.InsertTimesByDisciplineModel
+
+<h3>Insert times for @Html.Raw(Model.Discipline.DisplayName)</h3>
+<table>
+    <tr>
+        <th></th>
+        <th>@Html.Raw(Model.DisplayDate)</th>
+        <th><input type="button" value="+" id="addDate" /></th>
+    </tr>
+    @{
+        foreach (var person in Model.People)
+        {
+            <tr>
+                <td>@Html.Raw(person.DisplayName)</td>
+                <td><input type="number" class="time" date="@Html.Raw(Model.Date.Ticks)" personId="person.Pk" /></td>
+            </tr>
+        }
+        <tr>
+            <th><input type="button" value="+" id="addPerson" /></th>
+            <td></td>
+        </tr>
+    }
+</table>
