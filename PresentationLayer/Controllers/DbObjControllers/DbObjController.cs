@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Net;
 using System.Web.Mvc;
-using BusinessLayer;
 using BusinessLayer.DbHandler;
 using Microsoft.Ajax.Utilities;
 using PresentationLayer.Extensions;

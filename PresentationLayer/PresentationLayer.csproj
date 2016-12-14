@@ -224,6 +224,7 @@
     <Compile Include="Models\DetailsModel.cs" />
     <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\InsertModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PeopleIndexModel.cs" />
     <Compile Include="Models\InsertTimesByDisciplineModel.cs" />
     <Compile Include="Models\ViewDbModel.cs" />
@@ -328,6 +329,7 @@
     <None Include="Properties\PublishProfiles\SlrgBern.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Images\SlrgBernLogoTransparent.gif" />
+    <Content Include="Images\YouShallNotPass.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\cldr.js" />

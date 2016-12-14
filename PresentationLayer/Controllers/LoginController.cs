@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
-using System.Security.Cryptography;
-using System.Text;
-using BusinessLayer;
 using BusinessLayer.DbHandler;
-using PresentationLayer.Config;
 using Shared;
-using Shared.Models.db;
+using PresentationLayer.Models;
 
 namespace PresentationLayer.Controllers
 {
@@ -22,7 +14,7 @@ namespace PresentationLayer.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return View("Login");
+            return View("Login", new LoginModel());
         }
 
 
@@ -41,6 +33,7 @@ namespace PresentationLayer.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
+            return View("Login", new LoginModel { CurrentMode = LoginModel.PageMode.Erroneous });
             return RedirectToAction("Login", "Login");
         }
 

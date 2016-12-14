@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using BusinessLayer;
 using BusinessLayer.DbHandler;
 using PresentationLayer.Extensions;
-using Shared.Models;
 using Shared.Models.Chart;
 using Shared.Models.db;
 

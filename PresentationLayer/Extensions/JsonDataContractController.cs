@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Text;
 using System.Web.Mvc;
 
 namespace PresentationLayer.Extensions

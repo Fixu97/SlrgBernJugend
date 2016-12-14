@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web;
-using Shared.Models;
 using Shared.Models.db;
 
 namespace Shared

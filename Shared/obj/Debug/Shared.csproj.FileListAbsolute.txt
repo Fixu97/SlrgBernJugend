@@ -12,3 +12,4 @@ D:\dev\Git\SlrgBernJugend\Shared\bin\Debug\Shared.dll
 D:\dev\Git\SlrgBernJugend\Shared\bin\Debug\Shared.pdb
 D:\dev\Git\SlrgBernJugend\Shared\obj\Debug\Shared.dll
 D:\dev\Git\SlrgBernJugend\Shared\obj\Debug\Shared.pdb
+D:\dev\Git\SlrgBernJugend\Shared\obj\Debug\Shared.csprojResolveAssemblyReference.cache

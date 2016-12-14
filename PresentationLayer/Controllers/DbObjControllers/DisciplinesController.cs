@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using BusinessLayer.DbHandler;
 using PresentationLayer.Models;
-using Shared.Models;
 using Shared.Models.db;
 
 namespace PresentationLayer.Controllers.DbObjControllers
