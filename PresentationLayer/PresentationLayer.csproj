@@ -299,6 +299,7 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\DoMagicButton.png" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\SlrgBernIco.jpg" />
     <Content Include="Images\SlrgBernLogo.jpg" />
@@ -439,6 +440,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\DbObjViews\Times\Create.cshtml" />
+    <Content Include="Views\DbObjViews\Times\CreateWizard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

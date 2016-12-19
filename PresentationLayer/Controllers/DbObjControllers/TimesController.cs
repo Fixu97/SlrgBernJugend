@@ -6,6 +6,7 @@ using BusinessLayer;
 using BusinessLayer.DbHandler;
 using PresentationLayer.Models;
 using Shared.Models.db;
+using System.Linq;
 
 namespace PresentationLayer.Controllers.DbObjControllers
 {
@@ -78,7 +79,7 @@ namespace PresentationLayer.Controllers.DbObjControllers
         }
 
         [HttpGet]
-        public ActionResult CreateByDiscipline(int id)
+        public ActionResult Wizard(int id)
         {
             var discipline = DisciplineHandler.Select(id);
             var people = PersonHandler.GetAll();
@@ -89,7 +90,8 @@ namespace PresentationLayer.Controllers.DbObjControllers
                 People = people
             };
 
-            return View("~/Views/DbObjViews/Times/CreateByDiscipline.cshtml", model);
+            ViewBag.Title = "Wizard, magic n'shit";
+            return View("~/Views/DbObjViews/Times/CreateWizard.cshtml", model);
         }
 
         [HttpPost]
@@ -97,6 +99,27 @@ namespace PresentationLayer.Controllers.DbObjControllers
         {
             var times = BusinessLayer.GetAll();
             return Json(times);
+        }
+
+        [HttpGet]
+        public ActionResult CreateByDiscipline(int discId, string people, string date)
+        {
+
+            var peopleIds = people.Split(',').ToList().Select(x => int.Parse(x));
+
+            var dateTime = DateTime.Parse(date);
+            var discipline = _disciplineHandler.Select(discId);
+            var peopleObjects = _personHandler.GetAll().Where(p => peopleIds.Any(pId => pId == p.Pk)).ToList();
+
+            var model = new InsertTimesByDisciplineModel
+            {
+                Discipline = discipline,
+                People = peopleObjects,
+                Date = dateTime,
+            };
+
+            ViewBag.Title = "Insert by discipline";
+            return View("~/Views/DbObjViews/Times/CreateByDiscipline.cshtml", model);
         }
 
         [HttpPost]

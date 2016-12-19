@@ -1,0 +1,65 @@
+﻿
+@model PresentationLayer.Models.InsertTimesByDisciplineModel
+
+<h2>@Model.Discipline.DisplayName</h2>
+<p>Choose the people you'd like to insert times for...</p>
+
+<table>
+    <tr>
+        <td>
+            <select id="pool" multiple size="@Model.People.Count()" style="min-width:200px;">
+                @foreach(var person in Model.People)
+                {
+                    <option value="@person.Pk">@person.DisplayName</option>
+                }
+            </select>
+        </td>
+        <td>
+            <p>
+                <input type="button" id="add" style="" value=">">
+            </p>
+            <p>
+                <input type="button" id="remove" style="" value="<">
+            </p>
+        </td>
+        <td>
+            <select id="selected" multiple size="@Model.People.Count()" style="min-width:200px;"></select>
+        </td>
+        <td>
+            Date (You may add more later...)<br />
+            <input type="date" id="date" value="@Model.Date.ToString("yyyy-MM-dd")"/><br /><br />
+            <button id="submit" style="width:50px;"><img src="/Images/DoMagicButton.png" alt="Do magic!" title="Do magic!" style="max-width:100%;"/></button>
+        </td>
+    </tr>
+</table>
+
+<script>
+
+    $("#submit").click(function () {
+
+        var discId = @Model.Discipline.Pk;
+        var date = $("#date").val();
+        var people = [];
+
+        var options = $("#selected option");
+        for(var i = 0; i < options.length; i++){
+            people.push(options[i].value);
+        }
+
+
+        document.location = "/Times/CreateByDiscipline?discId=" + discId + "&people=" + people.toString() + "&date=" + date.toString();
+
+    });
+
+    $("#add").click(function (handler) {
+        move($("#pool"), $("#selected"));
+    });
+    $("#remove").click(function (handler) {
+        move($("#selected"), $("#pool"));
+    });
+
+    function move($from, $to) {
+        var selectedOptions = $from.find(":selected");
+        $to.prepend(selectedOptions);
+    }
+</script>

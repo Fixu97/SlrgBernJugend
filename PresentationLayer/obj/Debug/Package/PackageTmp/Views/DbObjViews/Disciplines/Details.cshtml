@@ -19,7 +19,7 @@
 <script>
     $(document).ready(function () {
         var btnEdit = $($("#edit")[0]);
-        var btnCreateByDisc = $("<button class='btn btn-primary' style='float:right;'onclick='document.location=\"/Times/Wizard/@Model.Pk\"' title='Insert times for this discipline'>Insert times...</button>");
+        var btnCreateByDisc = $("<button class='btn btn-primary' style='float:right;'onclick='document.location=\"/Times/CreateByDiscipline/@Model.Pk\"' title='Insert times for this discipline'>Insert times...</button>");
 
         btnEdit.after(btnCreateByDisc);
     });

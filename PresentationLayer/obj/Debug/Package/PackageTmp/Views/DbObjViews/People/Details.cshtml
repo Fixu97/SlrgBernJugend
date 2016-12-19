@@ -1,0 +1,57 @@
+﻿@model Shared.Models.db.PersonDTO
+<tr>
+    <th>
+        Prename
+    </th>
+    <td>
+        @Html.Raw(Model.Prename)
+    </td>
+</tr>
+<tr>
+    <th>
+        Lastname
+    </th>
+    <td>
+        @Html.Raw(Model.LastName)
+    </td>
+</tr>
+<tr>
+    <th>
+        Male
+    </th>
+    <td>
+        @Html.Raw(Model.Male)
+    </td>
+</tr>
+<tr>
+    <th>
+        Birthday
+    </th>
+    <td>
+        @Html.Raw(Model.Birthday.ToString("dd. MMMM yyyy"))
+    </td>
+</tr>
+<tr>
+    <th>
+        PhoneNr
+    </th>
+    <td>
+        @Html.Raw(Model.PhoneNr)
+    </td>
+</tr>
+<tr>
+    <th>
+        Email
+    </th>
+    <td>
+        @Html.Raw(Model.Email)
+    </td>
+</tr>
+<tr>
+    <th>
+        Active
+    </th>
+    <td>
+        @Html.Raw(Model.Active)
+    </td>
+</tr>
