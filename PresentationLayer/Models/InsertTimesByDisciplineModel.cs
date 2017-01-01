@@ -4,7 +4,7 @@ using Shared.Models.db;
 
 namespace PresentationLayer.Models
 {
-    public class InsertTimesByDisciplineModel
+    public class InsertTimesByDisciplineModel : ViewDbModel
     {
         private DateTime _date;
 

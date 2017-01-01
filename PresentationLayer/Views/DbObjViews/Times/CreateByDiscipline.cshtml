@@ -1,23 +1,37 @@
 ﻿@model PresentationLayer.Models.InsertTimesByDisciplineModel
 
-<h3>Insert times for @Html.Raw(Model.Discipline.DisplayName)</h3>
-<table>
-    <tr>
-        <th></th>
-        <th>@Html.Raw(Model.DisplayDate)</th>
-        <th><input type="button" value="+" id="addDate" /></th>
-    </tr>
-    @{
-        foreach (var person in Model.People)
-        {
+<h1>Insert times for @Html.Raw(Model.Discipline.DisplayName)</h1>
+@Html.ActionLink(Model.Title, "Index", Model.ControllerName) /
+@Html.ActionLink(Model.Discipline.DisplayName, "Details", Model.ControllerName, new { id = Model.Discipline.Pk }, null) /
+@Html.ActionLink("Wizard", "Wizard", "Times", new { id = Model.Discipline.Pk }, null) /
+@Html.ActionLink("Bulk Insert", "CreateByDiscipline", "Times", new {
+    discId = Model.Discipline.Pk,
+    people = string.Join(",", Model.People.Select( p => p.Pk).ToArray()),
+    date = Model.Date.ToString("yyyy-MM-dd") }, null) /
+
+@using (Html.BeginForm("BulkInsert", "Times", FormMethod.Post))
+{
+    <input type="submit" value="Submit" name="submit" />
+    <input type="number" value="@Model.Discipline.Pk" name="discId" style="display:none;"/>
+    <table>
+        <tr>
+            <th></th>
+            <th>@Html.Raw(Model.DisplayDate)</th>
+            <th><input type="button" value="+" id="addDate" /></th>
+        </tr>
+        @{
+            foreach (var person in Model.People)
+            {
+                <tr>
+                    <td>@Html.Raw(person.DisplayName)</td>
+                    <td><input name="time|@person.Pk|@Model.Date.ToString("yyyy-MM-dd")" type="number" class="time" date="@Html.Raw(Model.Date.Ticks)" personId="person.Pk" /></td>
+                </tr>
+            }
             <tr>
-                <td>@Html.Raw(person.DisplayName)</td>
-                <td><input type="number" class="time" date="@Html.Raw(Model.Date.Ticks)" personId="person.Pk" /></td>
+                <th><input type="button" value="+" id="addPerson" /></th>
+                <td></td>
             </tr>
         }
-        <tr>
-            <th><input type="button" value="+" id="addPerson" /></th>
-            <td></td>
-        </tr>
-    }
-</table>
+    </table>
+    <input type="submit" value="Submit" name="submit"/>
+}

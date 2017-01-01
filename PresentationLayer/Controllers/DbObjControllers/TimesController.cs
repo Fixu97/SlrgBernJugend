@@ -86,6 +86,8 @@ namespace PresentationLayer.Controllers.DbObjControllers
 
             var model = new InsertTimesByDisciplineModel
             {
+                ControllerName = "Disciplines",
+                Title = "Disciplines",
                 Discipline = discipline,
                 People = people
             };
@@ -113,6 +115,8 @@ namespace PresentationLayer.Controllers.DbObjControllers
 
             var model = new InsertTimesByDisciplineModel
             {
+                ControllerName = "Disciplines",
+                Title = "Disciplines",
                 Discipline = discipline,
                 People = peopleObjects,
                 Date = dateTime,
@@ -120,6 +124,49 @@ namespace PresentationLayer.Controllers.DbObjControllers
 
             ViewBag.Title = "Insert by discipline";
             return View("~/Views/DbObjViews/Times/CreateByDiscipline.cshtml", model);
+        }
+        
+        [HttpPost]
+        public ActionResult BulkInsert()
+        {
+            var discId = int.Parse(Request.Form["discId"]);
+            var discipline = _disciplineHandler.Select(discId);
+
+            var times = new List<TimeDTO>();
+            
+            foreach (string key in Request.Form.AllKeys.Where( k => k.StartsWith("time")))
+            {
+                var strVal = Request.Form[key];
+                decimal value;
+
+                // Don't insert empty times
+                if(string.IsNullOrEmpty(strVal) || !decimal.TryParse(strVal, out value))
+                {
+                    continue;
+                }
+
+                var parts = key.Split('|');
+
+                var persId = int.Parse(parts[1]);
+                var person = _personHandler.Select(persId);
+
+                var date = DateTime.Parse(parts[2]);
+
+                times.Add(new TimeDTO
+                    {
+                        Person = person,
+                        FK_P = person.Pk,
+                        Discipline = discipline,
+                        FK_D = discipline.Pk,
+                        Date = date,
+                        Seconds = value
+                    });
+            }
+
+            // insert all times
+            times.ForEach(t => BusinessLayer.Insert(t));
+
+            return RedirectToAction("Wizard", new { id = discId });
         }
 
         [HttpPost]

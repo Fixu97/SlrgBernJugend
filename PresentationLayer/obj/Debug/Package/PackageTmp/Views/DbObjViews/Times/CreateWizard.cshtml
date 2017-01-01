@@ -1,11 +1,7 @@
 ﻿
 @model PresentationLayer.Models.InsertTimesByDisciplineModel
 
-<h1>@Model.Discipline.DisplayName</h1>
-@Html.ActionLink(Model.Title, "Index", Model.ControllerName) /
-@Html.ActionLink(Model.Discipline.DisplayName, "Details", Model.ControllerName, new { id = Model.Discipline.Pk }, null) /
-@Html.ActionLink("Wizard", "Wizard", Model.ControllerName, new { id = Model.Discipline.Pk }) /
-
+<h2>@Model.Discipline.DisplayName</h2>
 <p>Choose the people you'd like to insert times for...</p>
 
 <table>
@@ -27,7 +23,7 @@
             </p>
         </td>
         <td>
-            <select id="selected" multiple size="@Model.People.Count()" style="min-width:200px;" required></select>
+            <select id="selected" multiple size="@Model.People.Count()" style="min-width:200px;"></select>
         </td>
         <td>
             Date (You may add more later...)<br />
@@ -48,12 +44,6 @@
         var options = $("#selected option");
         for(var i = 0; i < options.length; i++){
             people.push(options[i].value);
-        }
-
-        if (options.length === 0){
-            $("#selected").css("border-style", "solid");
-            $("#selected").css("border-color", "red");
-            return;
         }
 
 
