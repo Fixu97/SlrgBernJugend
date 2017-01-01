@@ -8,7 +8,8 @@ namespace PresentationLayer
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/multiselect/js/jquery.multi-select.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
@@ -35,7 +36,8 @@ namespace PresentationLayer
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/site.css",
-                "~/Content/bootstrap.css"));
+                "~/Content/bootstrap.css",
+                "~/Scripts/multiselect/css/multi-select.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
