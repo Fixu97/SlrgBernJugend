@@ -1,0 +1,52 @@
+﻿
+@model PresentationLayer.Models.InsertTimesByDisciplineModel
+
+<h1>@Model.Discipline.DisplayName</h1>
+@Html.ActionLink(Model.Title, "Index", Model.ControllerName) /
+@Html.ActionLink(Model.Discipline.DisplayName, "Details", Model.ControllerName, new { id = Model.Discipline.Pk }, null) /
+@Html.ActionLink("Wizard", "Wizard", Model.ControllerName, new { id = Model.Discipline.Pk }) /
+
+
+<p>Choose the people you'd like to insert times for...<br/>
+    <select id="people" multiple size="@Model.People.Count()" style="min-width:200px;">
+    @foreach(var person in Model.People)
+    {
+        <option value="@person.Pk">@person.DisplayName</option>
+    }
+    </select>
+</p>
+<p>
+    Date (You may add more later...)<br />
+    <input type="date" id="date" value="@Model.Date.ToString("yyyy-MM-dd")"/>
+</p>
+<br />
+<p>
+    <button id="submit" style="width:50px;"><img src="/Images/DoMagicButton.png" alt="Do magic!" title="Do magic!" style="max-width:100%;" /></button>
+</p>
+
+<script>
+
+    $("#people").multiSelect();
+
+    $("#submit").click(function () {
+
+        var discId = @Model.Discipline.Pk;
+        var date = $("#date").val();
+        var people = [];
+
+        var options = $("#people option:selected");
+        for(var i = 0; i < options.length; i++){
+            people.push(options[i].value);
+        }
+
+        if (options.length === 0){
+            $("#selected").css("border-style", "solid");
+            $("#selected").css("border-color", "red");
+            return;
+        }
+
+
+        document.location = "/Times/CreateByDiscipline?discId=" + discId + "&people=" + people.toString() + "&date=" + date.toString();
+
+    });
+</script>

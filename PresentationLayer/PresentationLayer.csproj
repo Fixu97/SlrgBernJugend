@@ -365,6 +365,25 @@
     <Content Include="Scripts\knockout-3.4.0.js" />
     <Content Include="Scripts\Model\Chart.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\multiselect\.gitignore" />
+    <Content Include="Scripts\multiselect\css\multi-select.css" />
+    <Content Include="Scripts\multiselect\css\multi-select.dev.css" />
+    <Content Include="Scripts\multiselect\css\multi-select.dist.css" />
+    <Content Include="Scripts\multiselect\Gruntfile.js" />
+    <Content Include="Scripts\multiselect\img\switch.png" />
+    <Content Include="Scripts\multiselect\js\jquery.multi-select.js" />
+    <Content Include="Scripts\multiselect\LICENSE.txt" />
+    <Content Include="Scripts\multiselect\samples\callbacks.html" />
+    <Content Include="Scripts\multiselect\samples\index.html" />
+    <Content Include="Scripts\multiselect\samples\Pre-selected-options.html" />
+    <Content Include="Scripts\multiselect\test\lib\jasmine-1.2.0\jasmine-html.js" />
+    <Content Include="Scripts\multiselect\test\lib\jasmine-1.2.0\jasmine.css" />
+    <Content Include="Scripts\multiselect\test\lib\jasmine-1.2.0\jasmine.js" />
+    <Content Include="Scripts\multiselect\test\lib\jasmine-jquery.js" />
+    <Content Include="Scripts\multiselect\test\SpecRunner.html" />
+    <Content Include="Scripts\multiselect\test\spec\multiSelectSpec.js" />
+    <Content Include="Scripts\multiselect\test\spec\SpecHelper.js" />
+    <Content Include="Scripts\multiselect\test\src\jquery.js" />
     <Content Include="Scripts\Service\Global.js" />
     <Content Include="Scripts\Service\dataAccess.js" />
     <Content Include="Scripts\Model\Details.js" />
@@ -441,6 +460,13 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\DbObjViews\Times\Create.cshtml" />
     <Content Include="Views\DbObjViews\Times\CreateWizard.cshtml" />
+    <Content Include="Scripts\multiselect\bower.json" />
+    <Content Include="Scripts\multiselect\css\multi-select.dev.css.map" />
+    <Content Include="Scripts\multiselect\multi-select.jquery.json" />
+    <Content Include="Scripts\multiselect\package.json" />
+    <Content Include="Scripts\multiselect\README.markdown" />
+    <Content Include="Scripts\multiselect\scss\multi-select.scss" />
+    <Content Include="Scripts\multiselect\test\lib\jasmine-1.2.0\MIT.LICENSE" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

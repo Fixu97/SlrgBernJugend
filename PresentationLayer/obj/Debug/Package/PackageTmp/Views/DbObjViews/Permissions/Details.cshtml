@@ -1,0 +1,17 @@
+﻿@model Shared.Models.db.PermissionDTO
+<tr>
+    <th>
+        User
+    </th>
+    <td>
+        @Html.Raw(Model.User.Username)
+    </td>
+</tr>
+<tr>
+    <th>
+        Person
+    </th>
+    <td>
+        @Html.Raw(Model.Person.DisplayName)
+    </td>
+</tr>
