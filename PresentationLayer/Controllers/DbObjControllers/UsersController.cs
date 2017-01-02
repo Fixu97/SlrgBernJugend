@@ -26,7 +26,7 @@ namespace PresentationLayer.Controllers.DbObjControllers
         {
             var dbObjs = BusinessLayer.GetAll();
             var users = new List<UserDTO>();
-            dbObjs.ForEach(u => users.Add((UserDTO)u));
+            dbObjs.ForEach(u => users.Add(u));
 
             var prop = new IndexModel()
             {

@@ -3,7 +3,7 @@
 <div id ="chart-area">
     <ul class="nav nav-tabs">
         <li id="genderMixed" class="active">
-            <a data-toggle="tab">Mixed</a>
+            <a data-toggle="tab">All</a>
         </li>
         <li id="genderFemale">
             <a data-toggle="tab">Women</a>
@@ -11,11 +11,19 @@
         <li id="genderMale">
             <a data-toggle="tab">Men</a>
         </li>
+        <li id="peopleCustom">
+            <a data-toggle="tab">Custom</a>
+        </li>
     </ul>
-    <div id = "tab-content"></div>
+    <div id = "tab-content">
+        loading...
+    </div>
 </div>
 
 <script>
+
+    $tabContent = $("#tab-content");
+    $people = $("#people");
 
     $(document).ready(function() {
 
@@ -23,9 +31,9 @@
         $("ul.nav.nav-tabs a.active").first().addClass("active");
 
         // Assign width until chart is loaded
-        //$("#tab-content").attr("style","height:500px");
+        //$tabContent.attr("style","height:500px");
 
-        CreateChart($("#tab-content") , @Model.Pk);
+        CreateChart($tabContent , @Model.Pk);
         
     });
 
@@ -41,19 +49,72 @@
 
         switch (id) {
             case "genderMixed":
-                CreateChart($("#tab-content") , @Model.Pk);
+                CreateChart($tabContent , @Model.Pk);
                 break;
             case "genderMale":
-                CreateChartForDisciplineByGender($("#tab-content"), @Model.Pk, true);
+                CreateChartForDisciplineByGender($tabContent, @Model.Pk, true);
                 break;
             case "genderFemale":
-                CreateChartForDisciplineByGender($("#tab-content"), @Model.Pk, false);
+                CreateChartForDisciplineByGender($tabContent, @Model.Pk, false);
+                break;
+            case "peopleCustom":
+                BuildPeopleMultiselect();
                 break;
             dafault:
                 CreateChart($(this),"Discipline" , @Model.Pk);
                 break;
         }
     });
+
+    function BuildPeopleMultiselect(){
+        DataAccess.getAllPeople(
+            function(people){
+
+                // remove loading text
+                $tabContent.empty();
+                $tabContent.append("<br/>");
+
+                var $select = $("<select id='people' multiple></select>");
+
+                for (var i = 0; i < people.length; i++){
+                    var $option = $("<option value='" + people[i].Pk + "'>" + people[i].DisplayName + "</option>");
+                    $select.append($option);
+                }
+
+                $tabContent.append($select);
+                $people = $("#people");
+                
+                $people.multiSelect();
+                $people.multiSelect('deselect');
+
+                // append additional container for chart (so the select box wont get removed every time)
+                $("#chartContainer").remove();
+                var $chartContainer = $("<div id='chartContainer'></div>");
+                $tabContent.append($chartContainer);
+
+                $people.change(function() {
+                    
+                    // don't request charts for no person
+                    if ($people.val().length < 1){
+                        $chartContainer.empty();
+                        return;
+                    }
+
+                    CreateChartForDisciplineForPeople($chartContainer, @Model.Pk, getCsvIds());
+                });
+
+            },
+            function(error){
+                $tabContent.text(error);
+            });
+    }
+
+    function getCsvIds (){
+
+        var csv = $people.val().join(',');
+
+        return csv;
+    }
 
 </script>
 @Scripts.Render("~/bundles/chartjs")

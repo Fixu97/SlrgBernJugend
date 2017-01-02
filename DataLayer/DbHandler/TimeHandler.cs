@@ -91,7 +91,7 @@ namespace DataLayer.DbHandler
                                 sqlReader.GetInt32(13)
                                 );
 
-                            times.Add((TimeDTO)tmpTime);
+                            times.Add(tmpTime);
                         }
                     }
                 }
@@ -119,7 +119,7 @@ namespace DataLayer.DbHandler
                 Seconds = seconds,
                 Date = date
             };
-            return (TimeDTO)time;
+            return time;
         }
 
         public List<TimeDTO> GetTimesByPeople(List<PersonDTO> personDtos)

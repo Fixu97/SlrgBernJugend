@@ -56,8 +56,8 @@ namespace DataLayer.DbHandler
                             // if not, add the current relay to the list
                             if (existingRelay == null)
                             {
-                                relays.Add((RelayDTO)tmpRelay);
-                                existingRelay = (RelayDTO)tmpRelay;
+                                relays.Add(tmpRelay);
+                                existingRelay = tmpRelay;
                             }
 
                             if (sqlReader.IsDBNull(2) || sqlReader.IsDBNull(3) || sqlReader.IsDBNull(4) || sqlReader.IsDBNull(5))

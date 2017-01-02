@@ -50,7 +50,7 @@ namespace DataLayer.DbHandler
                                 sqlReader.GetInt32(2),
                                 sqlReader.GetInt32(3)
                             );
-                            relays.Add((RelayDisciplineDTO)tmpRelayDiscipline);
+                            relays.Add(tmpRelayDiscipline);
                         }
                     }
                 }

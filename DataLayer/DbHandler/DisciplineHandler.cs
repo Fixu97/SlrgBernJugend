@@ -13,7 +13,7 @@ namespace DataLayer.DbHandler
 
         protected override Dictionary<string, string> GetAttributeValuePairs(DisciplineDTO dbObj)
         {
-            var discipline = (DisciplineDTO)dbObj;
+            var discipline = dbObj;
             var dictionary = new Dictionary<string, string>();
 
             dictionary.Add("Discipline", discipline.DiscName);
@@ -46,7 +46,7 @@ namespace DataLayer.DbHandler
                                 sqlReader.GetString(1),
                                 sqlReader.GetInt32(2)
                             );
-                            disciplines.Add((DisciplineDTO)tmpDiscipline);
+                            disciplines.Add(tmpDiscipline);
                         }
                     }
                 }

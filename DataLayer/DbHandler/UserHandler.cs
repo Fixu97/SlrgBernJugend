@@ -48,7 +48,7 @@ namespace DataLayer.DbHandler
 
         protected override Dictionary<string, string> GetAttributeValuePairs(UserDTO dbObj)
         {
-            var permission = (UserDTO)dbObj;
+            var permission = dbObj;
             var dictionary = new Dictionary<string, string>();
 
             dictionary.Add("Username", permission.Username);
@@ -87,7 +87,7 @@ namespace DataLayer.DbHandler
                                 sqlReader.GetString(4), 
                                 sqlReader.GetBoolean(5)
                                 );
-                            users.Add((UserDTO)tmpUser);
+                            users.Add(tmpUser);
                             }
                         }
                         con.Close();
@@ -121,7 +121,7 @@ namespace DataLayer.DbHandler
             var result = ReadParamterized(query, new List<string> { username });
 
             var users = new List<UserDTO>();
-            result.ForEach(r => users.Add((UserDTO)r));
+            result.ForEach(r => users.Add(r));
 
             if (users.Count > 0)
             {

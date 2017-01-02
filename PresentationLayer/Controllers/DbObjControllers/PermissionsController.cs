@@ -118,8 +118,8 @@ namespace PresentationLayer.Controllers.DbObjControllers
             var personHandler = new DbPersonHandler();
             var userHandler = new DbUserHandler();
 
-            permission.Person = (PersonDTO) personHandler.Select(permission.FK_P);
-            permission.User = (UserDTO) userHandler.Select(permission.FK_U);
+            permission.Person = personHandler.Select(permission.FK_P);
+            permission.User = userHandler.Select(permission.FK_U);
 
             return permission;
         }

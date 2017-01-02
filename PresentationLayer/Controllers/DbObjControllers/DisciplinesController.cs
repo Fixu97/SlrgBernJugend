@@ -25,7 +25,7 @@ namespace PresentationLayer.Controllers.DbObjControllers
         {
             var dbObjs = BusinessLayer.GetAll();
             var disciplines = new List<DisciplineDTO>();
-            dbObjs.ForEach( d => disciplines.Add((DisciplineDTO) d));
+            dbObjs.ForEach( d => disciplines.Add(d));
 
             var prop = new IndexModel()
             {

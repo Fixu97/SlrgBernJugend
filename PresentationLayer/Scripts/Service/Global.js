@@ -264,6 +264,27 @@ function CreateChartForPersonForDiscipline(container, personId, disciplineId) {
         }
     });
 }
+/**
+ * pIds is a comma separated list of person ids
+**/
+function CreateChartForDisciplineForPeople(container, disciplineId, pIds) {
+
+    // First get chart
+    $.ajax({
+        url: '/Chart/GetChartsForDisciplineForPeople/',
+        async: true,
+        dataType: 'json',
+        data: { id: disciplineId, pIds: pIds },
+        type: 'GET',
+        success: function (charts) {
+            AppendChart(container, charts);
+            AppendHighScoreTable(container, disciplineId);
+        },
+        error: function (error) {
+            errorHandler(error, container);
+        }
+    });
+}
 
 function AppendHighScoreTable(container, disciplineId, male) {
 

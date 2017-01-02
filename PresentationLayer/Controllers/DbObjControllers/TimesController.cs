@@ -30,7 +30,7 @@ namespace PresentationLayer.Controllers.DbObjControllers
         {
             var dbObjs = BusinessLayer.GetAll();
             var times = new List<TimeDTO>();
-            dbObjs.ForEach(t => times.Add((TimeDTO) t));
+            dbObjs.ForEach(t => times.Add(t));
 
             var prop = new IndexModel()
             {

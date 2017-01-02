@@ -69,7 +69,7 @@ namespace PresentationLayer.Controllers
         public FileResult GetImportFile()
         {
             var disciplineId = Request.Params["discipline"];
-            var discipline = (DisciplineDTO)_disciplineHandler.Select(int.Parse(disciplineId));
+            var discipline = _disciplineHandler.Select(int.Parse(disciplineId));
 
             var peopleIdarr = Request.Params["people"].Split(',');
 
@@ -77,7 +77,7 @@ namespace PresentationLayer.Controllers
             for (var i = 0; i < peopleIdarr.Length; i++)
             {
                 var personId = int.Parse(peopleIdarr[i]);
-                var person = (PersonDTO)_personHandler.Select(personId);
+                var person = _personHandler.Select(personId);
                 people.Add(person);
             }
 

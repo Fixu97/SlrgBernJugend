@@ -31,7 +31,7 @@ namespace PresentationLayer.Controllers.DbObjControllers
             {
                 var dbObjs = BusinessLayer.GetAll();
                 var people = new List<PersonDTO>();
-                dbObjs.ForEach(d => people.Add((PersonDTO)d));
+                dbObjs.ForEach(d => people.Add(d));
                 var prop = _GetIndexModel(people);
 
                 return View("~/Views/DbObjViews/Shared/Index.cshtml", prop);
@@ -56,7 +56,7 @@ namespace PresentationLayer.Controllers.DbObjControllers
                 var businessLayer = (DbPersonHandler)BusinessLayer;
                 var dbObjs = businessLayer.GetAll(!showInactive);
                 var people = new List<PersonDTO>();
-                dbObjs.ForEach(d => people.Add((PersonDTO)d));
+                dbObjs.ForEach(d => people.Add(d));
 
                 var prop = _GetIndexModel(people);
                 prop.ShowInactive = showInactive;

@@ -87,7 +87,7 @@ namespace DataLayer.DbHandler
                             phoneNr,
                             email
                         );
-                        people.Add((PersonDTO)tmpPerson);
+                        people.Add(tmpPerson);
                     }
                     con.Close();
                 }
@@ -100,7 +100,7 @@ namespace DataLayer.DbHandler
             }
 
             var result = new List<DbObjDTO>();
-            people.ForEach(p => result.Add((DbObjDTO) p));
+            people.ForEach(p => result.Add(p));
 
             return people;
         }

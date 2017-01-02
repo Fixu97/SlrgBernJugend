@@ -16,7 +16,7 @@ namespace DataLayer.DbHandler
 
         protected override Dictionary<string, string> GetAttributeValuePairs(PermissionDTO dbObj)
         {
-            var permission = (PermissionDTO) dbObj;
+            var permission = dbObj;
             var dictionary = new Dictionary<string, string>();
 
             dictionary.Add("FK_U", permission.FK_U.ToString());
@@ -71,7 +71,7 @@ namespace DataLayer.DbHandler
                                 phoneNr,
                                 email
                                 );
-                            permissions.Add((PermissionDTO)tmpPermission);
+                            permissions.Add(tmpPermission);
 
                             var userHandler = new UserHandler();
 
